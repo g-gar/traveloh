@@ -1,7 +1,7 @@
 # traveloh
 ## Requirements
 * Python > 3.0.0
-* Python virtualenv module
+* Python `virtualenv` module
 * nodejs & npm
 ## Installation & configuration
 ### Backend
