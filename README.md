@@ -5,7 +5,7 @@
 ## Installation & configuration
 ### Backend
 ```cmd
-virtualenv -p python backend
+python -m venv backend
 cd backend
 
 source bin/activate (on Unix)
