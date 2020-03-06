@@ -13,7 +13,7 @@ export class ApiSimpleMessageService implements ApiCallerService<string> {
   constructor(private http: HttpClient){}
 
   doCall(param: string): Observable<object> {
-    const url = environment.sentimentApi.baseUrl;
+    const url = environment.sentimentApi.baseUrl + "/" +environment.sentimentApi.variants[0];
     const analyzer = environment.sentimentApi.types[0];
     const body = {
       analyzer,
