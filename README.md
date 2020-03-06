@@ -1,4 +1,7 @@
 # traveloh
+## Requirements
+* Python > 3.0.0
+* nodejs & npm
 ## Installation & configuration
 ### Backend
 ```cmd
@@ -20,3 +23,7 @@ It runs by default on `http://localhost:5000` and requests are accepted under `h
 
 
 ### Frontend
+```cmd
+npm install
+ng serve --open
+```
