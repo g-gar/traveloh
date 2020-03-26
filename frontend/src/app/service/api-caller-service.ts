@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs';
 
-export interface ApiCallerService<T> {
+export interface ApiCallerService<T,R> {
 
-doCall(param: T): Observable<Object>;
+doCall(param: T): Promise<R>;
 
 }

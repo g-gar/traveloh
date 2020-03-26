@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiSimpleMessageService } from '../service/api-simple-message.service';
+import { VaderResult } from '../model/vader-result';
 import $ from "jquery";
+import { ApiVaderResult } from '../model/api-vader-result';
 
 @Component({
   selector: 'app-component1',
@@ -19,42 +21,33 @@ export class Component1Component implements OnInit {
      //alert(`El texto a anlizar es: ${this.miTexto}`);
      this.apiMessageService
       .doCall(this.miTexto)
-      .subscribe(
-       e => {
-         console.log(e);
-         this.loadProgress(e);
-       },
-       error => {
-         console.error(error);
-       },
-       () => {}
-     )
+      .then(response => {
+        response.results.forEach((result: VaderResult) => {
+          this.loadProgress(result)
+        });
+      })
    }
 
-   loadProgress(e: Object) {
-    console.log(e, typeof e)
-    e = e.results[0]
-    console.log(e)
-
-    let percentageToDegrees = (percentage: number) => {
+   loadProgress(result: VaderResult) {
+    let percentageToDegrees = (percentage: number): number => {
       return percentage / 100 * 360;
     }
 
-    let formatNumber = (n: number) => {
+    let formatNumberAsString = (n: number): string => {
       return new Intl.NumberFormat('en-us', {minimumFractionDigits: 2}).format(n);
     }
 
     $(".row").each(function() {
-      $(this).find('.positive-compound').text(`${formatNumber(e.pos * 100)}%`)
-      $(this).find('.neutral-compound').text(`${formatNumber(e.neu * 100)}%`)
-      $(this).find('.negative-compound').text(`${formatNumber(e.neg * 100)}%`)
+      $(this).find('.positive-compound').text(`${formatNumberAsString(result.pos * 100)}%`)
+      $(this).find('.neutral-compound').text(`${formatNumberAsString(result.neu * 100)}%`)
+      $(this).find('.negative-compound').text(`${formatNumberAsString(result.neg * 100)}%`)
     })
 
     $(".progress").each(function() {
       
-      let value = e.compound * 100;
-      var left = $(this).find('.progress-left .progress-bar');
-      var right = $(this).find('.progress-right .progress-bar');
+      let value: number = result.compound * 100;
+      let left = $(this).find('.progress-left .progress-bar');
+      let right = $(this).find('.progress-right .progress-bar');
 
       $(this).find('.progress-value > .h2').text(`${value}`)
       $(this).find('.progress-value > .h2').append('<sup class="small">%</sup>')
