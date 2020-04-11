@@ -1,7 +1,10 @@
 from bs4 import BeautifulSoup
+from selenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
 import urllib.request
 import json
 import argparse
+import time
 
 class Review():
    def __init__(self, quote, summary):
@@ -9,14 +12,20 @@ class Review():
       self.summary = summary
 
 def get_info(link):
-    response = urllib.request.urlopen(link)
-    soup = BeautifulSoup(response.read(),'html.parser')
+    browser = webdriver.Chrome(ChromeDriverManager().install())
+    browser.get(link)
+    time.sleep(5)
+    for span in browser.find_elements_by_class_name('location-review-review-list-parts-ExpandableReview__ctaLine--24Qlb'):
+        span.click()
+
+    soup = BeautifulSoup(browser.page_source, 'html.parser')
 
     reviews = []
-    for review in soup.find(id='REVIEWS').find_all(class_='review-container'):
-      quote = review.find(class_='quote').find('a', class_='title').get_text(strip=True)
-      summary = review.find(class_='prw_reviews_text_summary_hsx').find('p', class_='partial_entry').get_text(strip=True)
-      reviews.append(Review(quote, summary))
+    a = soup.find_all(True, attrs={'class': 'location-review-review-list-parts-ExpandableReview__reviewText--gOmRC'})
+    for container in a:
+        for span in container.find_all('span'):
+            print(span.getText())
+    browser.close()
     return reviews
 
 parser = argparse.ArgumentParser()
