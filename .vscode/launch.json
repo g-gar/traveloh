@@ -8,7 +8,7 @@
          "program": "${file}",
          "console": "integratedTerminal",
          "args": ["--url", "https://www.tripadvisor.es/Airline_Review-d8728986-Reviews-Aer-Lingus"],
-         "justMyCode": true
+         "justMyCode": false
       }
    ]
 }
