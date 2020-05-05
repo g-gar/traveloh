@@ -4,7 +4,11 @@ backend/python/Scripts/
 backend/python/tcl/
 backend/python/pyvenv.cfg
 
+backend/laravel/vendor/
+
 frontend/.vscode
 frontend/e2e/
 frontend/node_modules/
 frontend/.metadata/
+
+*.sqlite

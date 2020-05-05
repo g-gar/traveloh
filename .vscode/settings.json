@@ -1,3 +1,10 @@
 {
-	"python.pythonPath": "..\\traveloh\\backend\\Scripts\\python.exe"
+	"python.pythonPath": "..\\traveloh\\backend\\python\\Scripts\\python.exe",
+	"files.watcherExclude": {
+		"**/.git/objects/**": true,
+		"**/.git/subtree-cache/**": true,
+		"**/node_modules/*/**": true,
+		"**/backend/laravel/vendor/**": true,
+		"**/backend/laravel/storage/**": true
+	  }
 }
