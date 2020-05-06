@@ -1,15 +1,14 @@
 <?php
 
-namespace App;
+namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
 class Aena extends Model
 {
-    protected $table = 'flight_data';
+    protected $table = 'aena';
     protected $fillable = [
-        'name', 'source', 'airline', 'id_weather_data',
-        'flight_code', 'year', 'month', 'day', 'time', 'scheduled_time', 'destination'
+        'flight_code', 'year', 'month', 'day', 'hour', 'scheduled_hour', 'destination'
     ];
 
     protected $guarded = [

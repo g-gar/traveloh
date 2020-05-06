@@ -1,15 +1,16 @@
 <?php
 
-namespace App;
+namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Algorithm extends Model
+class Airline extends Model
 {
-    protected $table = 'algorithms';
+    protected $table = 'airlines';
     protected $fillable = [
         'name'
     ];
+
     protected $guarded = [
         
     ];

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTuTiemposTable extends Migration
+class CreateTwitterTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateTuTiemposTable extends Migration
      */
     public function up()
     {
-        Schema::create('tu_tiempos', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::create('twitter', function (Blueprint $table) {
+            $table->integer('id')->unique()->nullable(0)->foreign('id')->references('id')->on('data')->onDelete('cascade')->onUpdate('cascade');
+            $table->integer('id_tweet');
         });
     }
 
@@ -26,6 +26,6 @@ class CreateTuTiemposTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tu_tiempos');
+        Schema::dropIfExists('twitter');
     }
 }

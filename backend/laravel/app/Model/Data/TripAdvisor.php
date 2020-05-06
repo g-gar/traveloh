@@ -1,14 +1,14 @@
 <?php
 
-namespace App;
+namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
 class TripAdvisor extends Model
 {
-    protected $table = 'flight_data';
+    protected $table = 'tripadvisor';
     protected $fillable = [
-        'name', 'source', 'airline'
+        'ip_opinion', 'title', 'language'
     ];
 
     protected $guarded = [

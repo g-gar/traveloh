@@ -14,11 +14,11 @@ class CreateAdministratorsTable extends Migration
     public function up()
     {
         Schema::create('administrators', function (Blueprint $table) {
-            $table->id()->unique()->foreign('id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('username')->unique();
-            $table->string('password');
-            $table->string('email', 30)->unique()->nullable();
-            $table->string('token')->unique();
+            $table->integer('id')->unique()->nullable(0)->foreign('id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('username')->unique()->nullable(0);
+            $table->string('password')->nullable(0);
+            $table->string('email', 30)->unique()->nullable(0);
+            $table->string('token')->unique()->nullable(0);
         });
     }
 

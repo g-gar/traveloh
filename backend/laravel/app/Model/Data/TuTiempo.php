@@ -1,15 +1,15 @@
 <?php
 
-namespace App;
+namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
 class TuTiempo extends Model
 {
-    protected $table = 'weather_data';
+    protected $table = 'tu_tiempo';
     protected $fillable = [
-        'name', 'source', 
-        'weather', 'temperature', 'thermal_sensation', 'dust', 'wind_gust', 'humidity', 'cloud_factor', 'precipitation', 'atmospheric_pressure'
+        'weather', 'temperature', 'hour', 'wind', 'humidity', 'amospheric_pressure',
+        'timestamp'
     ];
 
     protected $guarded = [
@@ -18,6 +18,9 @@ class TuTiempo extends Model
 
     protected $hidden = [
         
+    ];
+    protected $casts = [
+        'timestamp' => 'date'
     ];
     public $timestamps = false;
 }

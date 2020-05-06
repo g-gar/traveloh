@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Model;
+namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class FlightData extends Model
+class Twitter extends Model
 {
-    protected $table = 'flight_data';
+    protected $table = 'twitter';
     protected $fillable = [
-        'id_weather_data', 'id_airline'
+        'id_tweet'
     ];
 
     protected $guarded = [

@@ -14,8 +14,7 @@ class CreateWeatherDataTable extends Migration
     public function up()
     {
         Schema::create('weather_data', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->integer('id')->unique()->nullable(0)->foreign('id')->references('id')->on('data')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

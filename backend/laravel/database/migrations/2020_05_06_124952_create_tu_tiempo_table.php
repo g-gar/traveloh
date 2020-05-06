@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAenaTable extends Migration
+class CreateTuTiempoTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,15 @@ class CreateAenaTable extends Migration
      */
     public function up()
     {
-        Schema::create('aena', function (Blueprint $table) {
+        Schema::create('tu_tiempo', function (Blueprint $table) {
             $table->integer('id')->unique()->nullable(0)->foreign('id')->references('id')->on('data')->onDelete('cascade')->onUpdate('cascade');
-            $table->string('flight_code');
-            $table->integer('year');
-            $table->integer('month');
-            $table->integer('day');
+            $table->string('weather');
             $table->string('hour');
-            $table->string('scheduled_hour');
-            $table->string('destination');
+            $table->integer('temperature');
+            $table->integer('wind');
+            $table->double('humidity', 3,2);
+            $table->integer('atmospheric_pressure');
+            $table->timestamp('timestamp');
         });
     }
 
@@ -32,6 +32,6 @@ class CreateAenaTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('aena');
+        Schema::dropIfExists('tu_tiempo');
     }
 }
