@@ -4,13 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Guest extends User
+class Algorithm extends Model
 {
-    protected $table = 'guests';
+    protected $table = 'algorithms';
     protected $fillable = [
-        'request', 'response'
+        'name'
     ];
-
     protected $guarded = [
         
     ];
