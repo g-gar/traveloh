@@ -4,11 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Guest extends User
+class SentimentAnalysisData extends Model
 {
-    protected $table = 'guests';
+    protected $table = 'weather_data';
     protected $fillable = [
-        'request', 'response'
+        'name', 'source', 'positive', 'negative', 'neutral', 'compound', 'text'
     ];
 
     protected $guarded = [

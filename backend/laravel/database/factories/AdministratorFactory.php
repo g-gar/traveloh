@@ -2,9 +2,9 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Administrator;
 use Faker\Generator as Faker;
 use App\User;
+use App\Administrator;
 
 $factory->define(Administrator::class, function (Faker $faker) {
     $users = factory(User::class,1)->create();

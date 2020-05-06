@@ -4,11 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Guest extends User
+class Data extends Model
 {
-    protected $table = 'guests';
+    protected $table = 'data';
     protected $fillable = [
-        'request', 'response'
+        'identifier', 'source'
     ];
 
     protected $guarded = [
