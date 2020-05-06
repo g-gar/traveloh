@@ -1,14 +1,15 @@
 <?php
 
-namespace App;
+namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
 class SentimentAnalysisData extends Model
 {
-    protected $table = 'weather_data';
+    protected $table = 'sentiment_analisis_data';
     protected $fillable = [
-        'name', 'source', 'positive', 'negative', 'neutral', 'compound', 'text'
+        'id_airline',
+        'positive', 'negative', 'neutral', 'compound', 'text'
     ];
 
     protected $guarded = [

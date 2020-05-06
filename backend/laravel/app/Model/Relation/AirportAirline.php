@@ -4,11 +4,11 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class FlightData extends Model
+class AirportAirline extends Model
 {
-    protected $table = 'flight_data';
+    protected $table = 'airport_airline';
     protected $fillable = [
-        'id_weather_data', 'id_airline'
+        'id_airport', 'id_airline'
     ];
 
     protected $guarded = [

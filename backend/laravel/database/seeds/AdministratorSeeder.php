@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Administrator;
+use App\Model\Administrator;
+use App\Model\User;
 
 class AdministratorSeeder extends Seeder
 {
@@ -13,7 +14,7 @@ class AdministratorSeeder extends Seeder
     public function run()
     {
         Administrator::all()->unique()->each(function(Administrator $administrator) {
-            Users::destroy($administrator->id);
+            User::destroy($administrator->id);
             Administrator::destroy($administrator->id);
         });
         factory(Administrator::class, 50)->create();

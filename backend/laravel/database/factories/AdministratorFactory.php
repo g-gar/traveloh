@@ -3,8 +3,8 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
 use Faker\Generator as Faker;
-use App\User;
-use App\Administrator;
+use App\Model\User;
+use App\Model\Administrator;
 
 $factory->define(Administrator::class, function (Faker $faker) {
     $users = factory(User::class,1)->create();

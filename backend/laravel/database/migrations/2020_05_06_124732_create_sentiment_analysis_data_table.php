@@ -14,8 +14,13 @@ class CreateSentimentAnalysisDataTable extends Migration
     public function up()
     {
         Schema::create('sentiment_analysis_data', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->integer('id')->unique()->nullable(0)->foreign('id')->references('id')->on('data')->onDelete('cascade')->onUpdate('cascade');
+            $table->double('positive', 8,2);
+            $table->double('negative', 8,2);
+            $table->double('neutral', 8,2);
+            $table->double('compound', 8,2);
+            $table->string('text');
+            $table->integer('id_airline')->references('id')->on('airlines')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
