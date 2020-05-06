@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\ScrapperController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,14 +14,17 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
+
+Route::get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::middleware('api')->get('/ping', function() {
+Route::get('/ping', function() {
     // If the Content-Type and Accept headers are set to 'application/json', 
     // this will return a JSON structure. This will be cleaned up later.
     return "ok";
 });
 
-Route::middleware('api')->get('/users', 'UserController@findAll');
+Route::get('execute/tutiempo.net/{airport}', function($airport) {
+    return ScrapperController::execute("tutiempo.net", $airport);
+});

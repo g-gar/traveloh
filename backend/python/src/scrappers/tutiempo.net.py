@@ -5,6 +5,7 @@ import json
 import argparse
 import urllib.request
 from json import JSONEncoder
+import re
 
 class Result():
     def __init__(self, hour, weather, temperature, wind, humidity, atmospheric_pressure):
@@ -14,6 +15,10 @@ class Result():
         self.wind = wind
         self.humidity = humidity
         self.atmospheric_pressure = atmospheric_pressure
+
+def toInt(str):
+    s = re.sub('[\\D]', '',str)
+    return int(s) if s else 0
 
 def scrape(url):
     page = requests.get(url)
@@ -26,7 +31,7 @@ def scrape(url):
     for row in table.find_all('tr'):
         i = [ele.text.strip() for ele in row.findChildren("td", recursive=False)]
         if len(i) == 6:
-            lista.append( Result( i[0], i[1], i[2], i[3], i[4], i[5] ))
+            lista.append( Result( i[0], i[1], toInt(i[2]), toInt(i[3]), float(toInt(i[4])) * 0.01, toInt(i[5]) ))
     return lista
 
 if __name__ == "__main__":
