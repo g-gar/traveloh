@@ -15,7 +15,7 @@ class ControlAPI extends Controller
             ['python', storage_path("app/execs/app_sentimiento.py"), 'Esto es un texto de prueba a analizar'] // ejecutamos 'python' + la ruta a nuestro archivo py (que se encuentra en execs)
         );
 
-        $process->run()
+        $process->run();
 
         echo $process->getOutput();
 
