@@ -8,7 +8,7 @@ class Airport extends Model
 {
     protected $table = 'airlines';
     protected $fillable = [
-        'name', 'location'
+        'code', 'location'
     ];
 
     protected $guarded = [

@@ -1,10 +1,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Model\Airport;
 use Illuminate\Support\Facades\DB;
 
-class AirportsSeeder extends Seeder
+class AirportSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,7 +13,7 @@ class AirportsSeeder extends Seeder
     public function run()
     {
         DB::table('airports')->insert([
-            'name' => 'MAD',
+            'code' => 'MAD',
             'location' => 'madrid-barajas',
         ]);
     }

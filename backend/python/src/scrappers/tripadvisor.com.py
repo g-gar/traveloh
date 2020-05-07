@@ -6,6 +6,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.chrome.options import Options  
+from chromedriver_py import binary_path
 import urllib.request
 import json
 import argparse
@@ -19,39 +20,47 @@ class Review():
 		self.text = text
 		self.language = language
 
+def wait_requests(driver):
+	for request in driver.requests:
+		if request.response and request.response.headers['Content-Type'] == 'application/json' and request.path == 'https://www.tripadvisor.es/data/graphql/batched':
+			return True
+	return False
+
 def get_info(link):
 	reviews = []
+	options = 1
+	driver = 1
 	try:
-		browser = webdriver.Chrome(ChromeDriverManager().install())
-		browser.get(link)
-		wait = WebDriverWait(browser,10)
-		wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'location-review-review-list-parts-ExpandableReview__reviewText--gOmRC')))
-
-		for request in browser.requests:
-			if request.response and request.response.headers['Content-Type'] == 'application/json' and request.path == 'https://www.tripadvisor.es/data/graphql/batched':
-				print(
-					request.path,
-					request.response.headers['Content-Type']
-				)
-				response = json.loads(request.response.body)
-
-				for i in response:
-					if 'data' in i:
-						if 'locations' in i['data']:
-							for location in i['data']['locations']:
-								if 'reviewListPage' in location:
-									for review in location['reviewListPage']['reviews']:
-										print(review['id'], review['userId'], review['title'], review['text'], review['language'])
-										r = Review(review['id'], review['userId'], review['title'], review['text'], review['language'])
-										reviews.append(r)
-
+		options = webdriver.ChromeOptions()
+		options.add_argument('--ignore-certificate-errors')
+		options.add_argument('--incognito')
+		options.add_argument('--headless')
+		driver = webdriver.Chrome(executable_path=binary_path, chrome_options=options)
+		driver.get(link)
+		wait = WebDriverWait(driver,120)
+		wait.until(wait_requests)
+		#wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'location-review-review-list-parts-ExpandableReview__reviewText--gOmRC')))
 	except TimeoutException:
 		print("Failed to load search bar at www.google.com")
 	except Exception as e:
 		print(e)
 	finally:
-		browser.quit()
-		return reviews
+		for request in driver.requests:
+			if request.response and request.response.headers['Content-Type'] == 'application/json' and request.path == 'https://www.tripadvisor.es/data/graphql/batched':
+				response = json.loads(request.response.body)
+
+				for r in response:
+					if 'locations' in r['data']:
+						try:
+							for location in r['data']['locations']:
+								if 'reviewListPage' in location:
+									for review in location['reviewListPage']['reviews']:
+										r = Review(review['id'], review['userId'], review['title'], review['text'], review['language'])
+										reviews.append(r)
+						except Exception as e:
+							""
+		driver.quit()
+	return reviews
 
 if __name__ == "__main__":
 	parser = argparse.ArgumentParser()
