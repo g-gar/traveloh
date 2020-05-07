@@ -1,8 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\ScrapperController;
-use App\Http\Controllers\TuTiempoScrapperController;
+use App\Http\Controllers\Controller\TuTiempoScrapperController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,4 +14,5 @@ use App\Http\Controllers\TuTiempoScrapperController;
 |
 */
 
-Route::get('execute/scrapper/tutiempo.net/{airport}', 'TuTiempoScrapperController@init');
+Route::get('execute/scrapper/tutiempo.net/{code}', 'TuTiempoScrapperController@init');
+Route::get('execute/scrapper/tripadvisor.com/{code}', 'TripAdvisorScrapperController@init');

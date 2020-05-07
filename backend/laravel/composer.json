@@ -39,7 +39,8 @@
             "App\\Model\\": "app/Model/",
             "App\\Model\\Data\\": "app/Model/",
             "App\\Model\\DataType\\": "app/Model/",
-            "App\\Model\\DataType\\Relation\\": "app/Model/"
+            "App\\Model\\DataType\\Relation\\": "app/Model/",
+            "App\\Http\\Controller\\": "app/Http/Controllers/Scrapper/"
         },
         "classmap": [
             "database/seeds",

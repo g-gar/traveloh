@@ -41,7 +41,7 @@ if __name__ == "__main__":
     results = scrape(args.url)
     print(json.dumps(
         {
-            'reviews': results
+            'results': results
         },
         default=lambda o: o.__dict__, sort_keys=True, indent=4
     ))
