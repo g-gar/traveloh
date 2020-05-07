@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\ScrapperController;
+use App\Http\Controllers\TuTiempoScrapperController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,5 +27,8 @@ Route::get('/ping', function() {
 });
 
 Route::get('execute/tutiempo.net/{airport}', function($airport) {
-    return ScrapperController::execute("tutiempo.net", $airport);
+    $commands = TuTiempoScrapperController::generateCommands([$airport]);
+    foreach (TuTiempoScrapperController::execute($commands) as $key => $json) {
+        TuTiempoScrapperController::consume_json($json);
+    }
 });
