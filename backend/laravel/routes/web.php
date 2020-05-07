@@ -66,6 +66,3 @@ Route::resource('varios2', 'variosmetodosrecursos')->except([
 
 */
 
-Route::resource('varios', 'variosmetodosrecursos');
-
-Route::resource('aeropuertos', 'gestionaeropuerto');

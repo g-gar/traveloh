@@ -15,20 +15,4 @@ use App\Http\Controllers\TuTiempoScrapperController;
 |
 */
 
-
-Route::get('/user', function (Request $request) {
-    return $request->user();
-});
-
-Route::get('/ping', function() {
-    // If the Content-Type and Accept headers are set to 'application/json', 
-    // this will return a JSON structure. This will be cleaned up later.
-    return "ok";
-});
-
-Route::get('execute/tutiempo.net/{airport}', function($airport) {
-    $commands = TuTiempoScrapperController::generateCommands([$airport]);
-    foreach (TuTiempoScrapperController::execute($commands) as $key => $json) {
-        TuTiempoScrapperController::consume_json($json);
-    }
-});
+Route::get('execute/scrapper/tutiempo.net/{airport}', 'TuTiempoScrapperController@init');

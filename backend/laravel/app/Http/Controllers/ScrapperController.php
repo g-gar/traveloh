@@ -21,4 +21,11 @@ abstract class ScrapperController extends Controller
 
     public abstract static function generateCommands($args);
     public abstract static function consume_json($json);
+
+    public static function init($args) {
+        $commands = self::generateCommands($args);
+        foreach (self::execute($commands) as $key => $json) {
+            self::consume_json($json);
+        }
+    }
 }
