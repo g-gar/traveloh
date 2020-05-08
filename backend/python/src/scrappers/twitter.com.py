@@ -1,3 +1,4 @@
+
 # -*- coding: utf-8 -*-
 """
 Created on Thu Mar 26 20:36:30 2020
@@ -19,9 +20,9 @@ end_date = dt.date(2020,3,16)
 limit = 500
 lang = 'spanish'
 
-tweets = query_tweets('ovni', begindate = begin_date, enddate = end_date, limit = limit, lang = lang)
+tweets = query_tweets('coronavirus', begindate = begin_date, enddate = end_date, limit = limit, lang = lang)
 df = pd.DataFrame(t.__dict__ for t in tweets)
 print(df.text)
-""" https://twitter.com/search?q=cornavirus&src=typed_query
+""" https://twitter.com/search?q=coronavirus&src=typed_query
 https://twitter.com/search?q=espa%C3%B1a&src=typed_query
- """
+ 
