@@ -15,13 +15,11 @@ class CreateAenaTable extends Migration
     {
         Schema::create('aena', function (Blueprint $table) {
             $table->integer('id')->unique()->nullable(0)->foreign('id')->references('id')->on('data')->onDelete('cascade')->onUpdate('cascade');
-            $table->string('flight_code');
-            $table->integer('year');
-            $table->integer('month');
-            $table->integer('day');
             $table->string('hour');
-            $table->string('scheduled_hour');
+            $table->string('flight_code');
             $table->string('destination');
+            $table->string('company');
+            $table->string('terminal');
         });
     }
 
