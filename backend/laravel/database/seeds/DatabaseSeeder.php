@@ -15,6 +15,6 @@ class DatabaseSeeder extends Seeder
         $this->call(AdministratorSeeder::class);
         $this->call(AirportSeeder::class);
         $this->call(AirlineSeeder::class);
-        TripAdvisor::truncate();
+        $this->call(AirportAirlinesSeeder::class);
     }
 }
