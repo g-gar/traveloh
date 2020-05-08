@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TwitterScrapperController extends ScrapperController
 {
@@ -21,10 +22,17 @@ class TwitterScrapperController extends ScrapperController
 		foreach (json_decode($json, true) as $key => $json) {
 			try {
 				foreach ($json as $key => $value) {
-				$id = DB::table('data')->insertGetId([
+					$id = DB::table('data')->insertGetId([
 						'identifier' => 'twitter',
 						'source' => 'twitter.com'
 					]);
+
+					$id = DB::table('sentiment_analysis_data')->insert([
+						'id' => $id,
+						'text' => 'twitter',
+						'source' => 'twitter.com'
+					]);
+
 					DB::table('twitter')->insert([
 						'id' => $id,
 						'id_twitter' => $value['id_twitter']
