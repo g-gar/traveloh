@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class SentimentAnalysisData extends Model
 {
-    protected $table = 'sentiment_analisis_data';
+    protected $table = 'sentiment_analysis_data';
     protected $fillable = [
         'id_airline',
         'positive', 'negative', 'neutral', 'compound', 'text'

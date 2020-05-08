@@ -6,16 +6,14 @@ import argparse
 def analyze(text):
 	analyzer = SentimentIntensityAnalyzer()
 	vs = analyzer.polarity_scores(text)
+	return vs
 
 if __name__ == "__main__":
 	parser = argparse.ArgumentParser()
 	parser.add_argument('--text', type=str)
 	args = parser.parse_args()
-	reviews = analyze(translator.translate(args.text, dest='en'))
+	vs = analyze(Translator().translate(str(args.text), dest='en').text)
 
-	print(json.dumps(
-		{
-			'polarity_scores': vs
-		},
+	print(json.dumps(vs,
 		default=lambda o: o.__dict__, sort_keys=True, indent=4
 	))
