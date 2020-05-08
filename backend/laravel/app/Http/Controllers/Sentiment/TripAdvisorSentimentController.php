@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\DB;
 
 class TripAdvisorSentimentController extends SentimentController
 {
+    /**
+     * Executes the TripAdvisor sentiment analysis on each review
+	 * @urlParam airline-code required The airline code. Example: Aerolinea-De-Antioquia
+	 */
     public static function init($tripadvisor_code) {
         $sentiment_analysis_datas = DB::table('airlines')
             ->join('sentiment_analysis_data', function($join) {

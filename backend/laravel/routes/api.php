@@ -25,10 +25,13 @@ Route::get('execute/sentiment/twitter.com/{code}', 'TwitterSentimentController@i
 
 Route::get('execute/scrapper/aena.es/{code}', 'AenaScrapperController@init');
 
-Route::get('info/airports/ranking', 'InfoAirportsController@rank');
-Route::get('info/airports/', 'InfoAirportsController@getAirportsInfo');
-Route::get('info/airports/{airport}', 'InfoAirportsController@getAirportInfo');
+Route::get('info/airports/ranking', 'AirportsController@rank');
+Route::get('info/airports/', 'AirportsController@getAirportsInfo');
+Route::get('info/airports/{airport}', 'AirportsController@getAirportInfo');
 
-Route::get('info/airlines/ranking', 'InfoAirlinesController@rank');
-Route::get('info/airlines/', 'InfoAirlinesController@getAirlinesInfo');
-Route::get('info/airlines/{airline}', 'InfoAirlinesController@getAirlineInfo');
+Route::get('info/airlines/ranking', 'AirlinesController@rank');
+Route::get('info/airlines/', 'AirlinesController@getAirlinesInfo');
+Route::get('info/airlines/{airline}', 'AirlinesController@getAirlineInfo');
+
+Route::get('info/flights/', 'FlightsController@getFlightsInfo');
+Route::get('info/flights/{flight}', 'FlightsController@getFlightInfo');

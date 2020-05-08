@@ -45,7 +45,10 @@ class TwitterScrapperController extends ScrapperController
 		}
 	}
 
-
+	/**
+	 * Executes the twitter scrapper
+	 * @urlParam airport-code required The airport code. Example: MAD
+	 */
 	public static function init($args) {
 		$result = [];
         $commands = self::generateCommands($args);

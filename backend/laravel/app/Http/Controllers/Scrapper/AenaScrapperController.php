@@ -14,30 +14,34 @@ use App\Model\Airport;
  * 
  */
 
-class AenaScrapperController extends ScrapperController
+class AenaScrapperController extends ScrapperController implements FlightScrapperController
 {
+	private static Airport $airport;
 
 	public static function generateCommands($airport_code){
 		$commands = [];
-		$aircod = Airport::where('code', $airport_code)->firstOrFail();
+		self::$airport = Airport::where('code', $airport_code)->firstOrFail();
     
-        $commands[$aircod->id] = PathsController::get_python_executable() . ' ';
-        $commands[$aircod->id] .= realpath(PathsController::get_python_path() . '/src/scrappers/aena.es.py') . ' --url ';
-		$commands[$aircod->id] .= "\"http://www.aena.es/csee/Satellite/infovuelos/es/?origin_ac=$airport_code&mov=S\"";
-		echo($commands[$aircod->id]);
+        $commands[self::$airport->id] = PathsController::get_python_executable() . ' ';
+        $commands[self::$airport->id] .= realpath(PathsController::get_python_path() . '/src/scrappers/aena.es.py') . ' --url ';
+		$commands[self::$airport->id] .= "\"http://www.aena.es/csee/Satellite/infovuelos/es/?origin_ac=$airport_code&mov=S\"";
+
 		return $commands;
 	}
 
 	public static function consume_json($json) {
-		var_dump($json);
 		try {
 			foreach (json_decode($json, true) as $key => $value) {
 				$id = DB::table('data')->insertGetId([
 					'identifier' => 'aena',
 					'source' => 'aena.es'
 				]);
+				//TODO: search arline
+				//TODO: get weather data
 				DB::table('flight_data')->insert([
-					'id' => $id
+					'id' => $id,
+					'id_weather_data' => -1,
+					'id_airline' => -1
 				]);
 				DB::table('aena')->insert([
 					'id' => $id,
@@ -53,14 +57,21 @@ class AenaScrapperController extends ScrapperController
 		}
 	}
 
+	/**
+	 * Executes the aena scrapper
+	 * @urlParam airport-code required The airport code. Example: MAD
+	 */
 	public static function init($args) {
 		$result = [];
 		$commands = self::generateCommands($args);
-		var_dump($commands);
         foreach (CommandController::execute($commands) as $key => $json) {
             array_push($result, $json);
             self::consume_json($json);
         }
         return $result;
+	}
+
+	public static function scrapWeatherData($airport){
+		return null;
 	}
 }
