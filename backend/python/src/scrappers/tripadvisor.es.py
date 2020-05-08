@@ -39,7 +39,6 @@ def get_info(link):
 		driver.get(link)
 		wait = WebDriverWait(driver,120)
 		wait.until(wait_requests)
-		#wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'location-review-review-list-parts-ExpandableReview__reviewText--gOmRC')))
 	except TimeoutException:
 		print("Failed to load search bar at www.google.com")
 	except Exception as e:

@@ -7,14 +7,16 @@ use Illuminate\Support\Facades\DB;
 
 class TripAdvisorScrapperController extends ScrapperController
 {
-    public static function generateCommands($airline_code){
+	private static $airline;
+
+    public static function generateCommands($tripadvisor_code){
 		$commands = [];
-		$airline = DB::table('airlines')->where('tripadvisor_code', $airline_code)->first();
-        $name = $airline->tripadvisor_name;
+		self::$airline = DB::table('airlines')->where('tripadvisor_code', $tripadvisor_code)->first();
+        $name = self::$airline->tripadvisor_name;
         
-        $commands[$airline_code] = PathsController::get_python_executable() . ' ';
-        $commands[$airline_code] .= realpath(PathsController::get_python_path() . '/src/scrappers/tripadvisor.com.py') . ' --url ';
-        $commands[$airline_code] .= "https://www.tripadvisor.es/Airline_Review-d$airline_code-Reviews-$name";
+        $commands[$tripadvisor_code] = PathsController::get_python_executable() . ' ';
+        $commands[$tripadvisor_code] .= realpath(PathsController::get_python_path() . '/src/scrappers/tripadvisor.es.py') . ' --url ';
+        $commands[$tripadvisor_code] .= "https://www.tripadvisor.es/Airline_Review-d$tripadvisor_code-Reviews-$name";
 
 		return $commands;
 	}
@@ -23,24 +25,24 @@ class TripAdvisorScrapperController extends ScrapperController
 		foreach (json_decode($json, true) as $key => $json) {
 			try {
 				foreach ($json as $key => $value) {
-                    $r = "";
 					$id = DB::table('data')->insertGetId([
 						'identifier' => 'tripadvisor',
 						'source' => 'tripadvisor.es'
 					]);
 					DB::table('sentiment_analysis_data')->insert([
                         'id' => $id,
-                        'positive' => $r['positive'],
-                        'negative' => $r['negative'],
-                        'neutral' => $r['neutral'],
-                        'compound' => $r['compound'],
-                        'text' => $json['text']
+                        'positive' => null,
+                        'negative' => null,
+                        'neutral' => null,
+                        'compound' => null,
+						'text' => "\"".$value['text']."\"",
+						'id_airline' => self::$airline->id
 					]);
-					DB::table('tu_tiempo')->insert([
+					DB::table('tripadvisor')->insert([
 						'id' => $id,
-                        'language' => $json['language'],
-                        'title' => $json['title'],
-                        'id_opinion' => $json['reviewId']
+                        'language' => $value['language'],
+                        'title' => $value['title'],
+                        'id_opinion' => $value['reviewId']
 					]);
 				}
 			} catch (\Throwable $th) {
@@ -70,7 +72,7 @@ class TripAdvisorScrapperController extends ScrapperController
         $commands = self::generateCommands($args);
         foreach (CommandController::execute($commands) as $key => $json) {
             array_push($result, $json);
-            //self::consume_json($json);
+            self::consume_json($json);
         }
         return $result;
 	}
