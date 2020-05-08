@@ -6,8 +6,11 @@ use App\Model\Airline;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class InfoAirlinesController extends Controller
+class AirlinesController extends Controller
 {
+    /**
+	 * Returns the airlines ranked by rating
+	 */
     public static function rank() {
         $results = [];
         foreach (Airline::all() as $airline) {
@@ -33,6 +36,9 @@ class InfoAirlinesController extends Controller
         return $result;
     }
 
+    /**
+	 * Returns all airlines complete information
+	 */
     public static function getAirlinesInfo() {
         foreach (Airline::all() as $airline) {
             $results[$airline->id] = self::getAirlineInfo($airline->id);
@@ -40,6 +46,9 @@ class InfoAirlinesController extends Controller
         return $results;
     }
 
+    /**
+	 * Returns an airlines complete information
+	 */
     public static function getAirlineInfo($id) {
         $airline = Airline::where('id', $id)->firstOrFail();
         $result['airline'] = $airline;
@@ -49,11 +58,10 @@ class InfoAirlinesController extends Controller
     }
 
     public static function getFlights($airline) {
-        return DB::table('airlines')
-            ->join('flight_data', 'flight_data.id_airline', '=', $airline->id)
-            ->join('aena', 'aena.id', '=', 'flight_data.id')
-            ->join('weather_data', 'weather_data.id', '=', 'flight_data.id_weather_data')
-            ->join('tutiempo', 'tutiempo.id', '=', 'weather_data.id')
-            ->get()->toArray();
+        return array_map(function($flight){
+            return FlightsController::getFlightInfo($flight->flight_code);
+        }, DB::table('airlines')
+            ->join('flight_data', 'flight_data.id_airline', '=', $airline->id)->get()->toArray()
+        );
     }
 }

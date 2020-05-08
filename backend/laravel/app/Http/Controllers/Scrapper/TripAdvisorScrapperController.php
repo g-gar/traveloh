@@ -52,6 +52,7 @@ class TripAdvisorScrapperController extends ScrapperController
 	}
 
 	/**
+	 * Executes the TripAdvisor scrapper
 	 * @urlParam airport-code required The airport code. Example: MAD
 	 * @response {
 	 * 	"results": [{

@@ -55,20 +55,8 @@ class TuTiempoScrapperController extends ScrapperController
 	}
 
 	/**
+	 * Executes the TuTiempo scrapper
 	 * @urlParam airport-code required The airport code. Example: MAD
-	 * @response {
-	 * 	"results": [{
-	 * 		"hour": "12:00",
-	 *		"weather": "Despejado",
-			"temperature": 25,
-			"wind": 26,
-			"humidity": 0.39,
-			"atmospheric-pressure": 1016
-	 * }]
-	 * }
-	 * @response 404 {
-	 * 	"message": "airport [lmfao] not supported"
-	 * }
 	 */
 	public static function init($args) {
 		$result = [];

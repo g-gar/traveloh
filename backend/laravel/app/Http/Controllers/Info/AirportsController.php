@@ -7,8 +7,11 @@ use App\Model\Airport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class InfoAirportsController extends Controller
+class AirportsController extends Controller
 {
+    /**
+	 * Returns the airports ranked by rating
+	 */
     public static function rank() {
         $results = [];
         foreach (Airport::all() as $airport) {
@@ -22,12 +25,15 @@ class InfoAirportsController extends Controller
         try {
             $airlines = self::getAirlines($airport);
             $result = array_reduce($airlines, function($accumulator, $airline) {
-                return $accumulator + InfoAirlinesController::compound($airline);
+                return $accumulator + AirlinesController::compound($airline);
             }, 0.0) / count($airlines);
         } catch (\Throwable $th) {}
         return $result;
     }
 
+    /**
+	 * Returns all airport complete information
+	 */
     public static function getAirportsInfo(){
         foreach (Airport::all() as $airport) {
             $result[$airport->id] = self::getAirportInfo($airport->code);
@@ -35,11 +41,15 @@ class InfoAirportsController extends Controller
         return $result;
     }
 
+    /**
+	 * Returns an airport complete information
+     * @urlParam airport required The airport code. Example: MAD
+	 */
     public static function getAirportInfo($code) {
         $airport = Airport::where('code', '=', $code)->firstOrFail();
         $result['airport'] = $airport;
         $result['airlines'] = array_map(function($airline){
-            return InfoAirlinesController::getAirlineInfo($airline->id);
+            return AirlinesController::getAirlineInfo($airline->id);
         }, self::getAirlines($airport));
         $result['rating'] = self::compound($airport);
         return $result;
