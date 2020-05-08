@@ -15,6 +15,8 @@ class CreateFlightDataTable extends Migration
     {
         Schema::create('flight_data', function (Blueprint $table) {
             $table->integer('id')->unique()->nullable(0)->foreign('id')->references('id')->on('data')->onDelete('cascade')->onUpdate('cascade');
+            $table->integer('id_weather_data')->nullable(0)->foreign('id')->references('id')->on('data')->onDelete('cascade')->onUpdate('cascade');
+            $table->integer('id_airline')->nullable(0)->foreign('id')->references('id')->on('data')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
