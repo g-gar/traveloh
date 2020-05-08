@@ -1,28 +1,24 @@
-
-# -*- coding: utf-8 -*-
-"""
-Created on Thu Mar 26 20:36:30 2020
-
-@author: manu1
-"""
-from twitterscraper import query_tweets
+from twitterscraper import *
 import datetime as dt
+import argparse
+import json
 import pandas as pd
-##import sys
 
-##print 'Numero de Parametros: ', len(sys.argv)
-##print 'Lista Argumentos: ', str(sys.argv)
+def scrape(text):
+	tweets = query_tweets(text, 10)
+	for tweet in tweets:
+		print(tweet)
+		
+	df = pd.read_json('tweets.json', encoding='utf-8')
+	return df
 
+if __name__ == "__main__":
+	parser = argparse.ArgumentParser()
+	parser.add_argument('--text', type=str)
+	args = parser.parse_args()
 
-
-begin_date = dt.date(2020,3,15)
-end_date = dt.date(2020,3,16)
-limit = 500
-lang = 'spanish'
-
-tweets = query_tweets('coronavirus', begindate = begin_date, enddate = end_date, limit = limit, lang = lang)
-df = pd.DataFrame(t.__dict__ for t in tweets)
-print(df.text)
-""" https://twitter.com/search?q=coronavirus&src=typed_query
-https://twitter.com/search?q=espa%C3%B1a&src=typed_query
- 
+	results = scrape(args.text)
+	print(json.dumps(
+		results,
+		default=lambda o: o.__dict__, sort_keys=True, indent=4
+	))
