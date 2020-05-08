@@ -8,7 +8,7 @@ class Aena extends Model
 {
     protected $table = 'aena';
     protected $fillable = [
-        'flight_code', 'year', 'month', 'day', 'hour', 'scheduled_hour', 'destination'
+        'hour', 'flight_code', 'destination', 'company', 'terminal'
     ];
 
     protected $guarded = [

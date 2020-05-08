@@ -23,6 +23,8 @@ Route::get('execute/sentiment/tripadvisor.es/{code}', 'TripAdvisorSentimentContr
 Route::get('execute/scrapper/twitter.com/{code}', 'TwitterScrapperController@init');
 Route::get('execute/sentiment/twitter.com/{code}', 'TwitterSentimentController@init');
 
+Route::get('execute/scrapper/aena.es/{code}', 'AenaScrapperController@init');
+
 Route::get('info/airports/ranking', 'InfoAirportsController@rank');
 Route::get('info/airports/', 'InfoAirportsController@getAirportsInfo');
 Route::get('info/airports/{airport}', 'InfoAirportsController@getAirportInfo');
