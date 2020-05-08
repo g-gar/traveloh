@@ -49,10 +49,11 @@ class InfoAirlinesController extends Controller
     }
 
     public static function getFlights($airline) {
-        $flights = DB::table('airlines')
-            ->join('flight_data', 'flight_data.id', '=', $airline->id)
+        return DB::table('airlines')
+            ->join('flight_data', 'flight_data.id_airline', '=', $airline->id)
+            ->join('aena', 'aena.id', '=', 'flight_data.id')
+            ->join('weather_data', 'weather_data.id', '=', 'flight_data.id_weather_data')
+            ->join('tutiempo', 'tutiempo.id', '=', 'weather_data.id')
             ->get()->toArray();
-
-        var_dump($flights);
     }
 }
