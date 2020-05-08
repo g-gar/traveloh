@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Model\Airport;
 
 /**
  * Scrapes aena.es
@@ -18,46 +19,44 @@ class AenaScrapperController extends ScrapperController
 
 	public static function generateCommands($airport_code){
 		$commands = [];
-		$locations = DB::table('airports')->where('code', $airport_code)->first();
+		$aircod = Airport::where('code', $airport_code)->firstOrFail();
     
-        $commands[$location] = PathsController::get_python_executable() . ' ';
-        $commands[$location] .= realpath(PathsController::get_python_path() . '/src/scrappers/aena.es.py') . ' --url ';
-        $commands[$location] .= "http://www.aena.es/csee/Satellite/infovuelos/es/?origin_ac=$airport_code&mov=S";
-    
+        $commands[$aircod->id] = PathsController::get_python_executable() . ' ';
+        $commands[$aircod->id] .= realpath(PathsController::get_python_path() . '/src/scrappers/aena.es.py') . ' --url ';
+		$commands[$aircod->id] .= "\"http://www.aena.es/csee/Satellite/infovuelos/es/?origin_ac=$airport_code&mov=S\"";
+		echo($commands[$aircod->id]);
 		return $commands;
 	}
 
 	public static function consume_json($json) {
-		foreach (json_decode($json, true) as $key => $json) {
-			try {
-				foreach ($json as $key => $value) {
-					$id = DB::table('data')->insertGetId([
-						'identifier' => 'tutiempo',
-						'source' => 'tutiempo.net'
-					]);
-					DB::table('weather_data')->insert([
-						'id' => $id
-					]);
-					DB::table('tu_tiempo')->insert([
-						'id' => $id,
-						'weather' => $value['weather'],
-						'hour' => $value['hour'],
-						'temperature' => $value['temperature'],
-						'wind' => $value['wind'],
-						'humidity' => $value['humidity'],
-						'atmospheric_pressure' => $value['atmospheric_pressure'],
-						'timestamp' => now()
-					]);
-				}
-			} catch (\Throwable $th) {
-				throw $th;
+		var_dump($json);
+		try {
+			foreach (json_decode($json, true) as $key => $value) {
+				$id = DB::table('data')->insertGetId([
+					'identifier' => 'aena',
+					'source' => 'aena.es'
+				]);
+				DB::table('flight_data')->insert([
+					'id' => $id
+				]);
+				DB::table('aena')->insert([
+					'id' => $id,
+					'hour' => $value['hour'],
+					'flight_code' => $value['flight_code'],
+					'destination' => $value['destination'],
+					'company' => $value['company'],
+					'terminal' => $value['terminal']
+				]);
 			}
+		} catch (\Throwable $th) {
+			throw $th;
 		}
 	}
 
 	public static function init($args) {
 		$result = [];
-        $commands = self::generateCommands($args);
+		$commands = self::generateCommands($args);
+		var_dump($commands);
         foreach (CommandController::execute($commands) as $key => $json) {
             array_push($result, $json);
             self::consume_json($json);

@@ -8,18 +8,17 @@ from json import JSONEncoder
 import re
 
 class Result():
-    def __init__(self, hour, idVuelo, destino, aerolinea, terminal):
+    def __init__(self, hour, flight_code, destination, company, terminal):
         self.hour = hour
-        self.idvuelo = weather
-        self.destino = temperature
-        self.aerolinea = wind
-        self.terminal = humidity
-        self.aeropuerto = aeropuerto
+        self.flight_code = flight_code
+        self.destination = destination
+        self.company = company
+        self.terminal = terminal
 
 
 
 def scrape(url):
-    page = requests.get("url")
+    page = requests.get(url)
     soup = BeautifulSoup(page.content, 'html.parser')
     #Buscamos las etiquetas que nos interesan
     info = soup.find('div', {'id':'flightResults'}).findAll('tr', {'class':'principal'})
@@ -52,8 +51,6 @@ if __name__ == "__main__":
     args = parser.parse_args()
     results = scrape(args.url)
     print(json.dumps(
-        {
-            'results': results
-        },
+        results,
         default=lambda o: o.__dict__, sort_keys=True, indent=4
     ))
