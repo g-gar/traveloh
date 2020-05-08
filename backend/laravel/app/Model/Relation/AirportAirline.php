@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class AirportAirline extends Model
 {
-    protected $table = 'airport_airline';
+    protected $table = 'airport_airlines';
     protected $fillable = [
         'id_airport', 'id_airline'
     ];

@@ -32,4 +32,27 @@ class InfoAirlinesController extends Controller
         } catch (\Throwable $th) {}
         return $result;
     }
+
+    public static function getAirlinesInfo() {
+        foreach (Airline::all() as $airline) {
+            $results[$airline->id] = self::getAirlineInfo($airline->id);
+        }
+        return $results;
+    }
+
+    public static function getAirlineInfo($id) {
+        $airline = Airline::where('id', $id)->firstOrFail();
+        $result['airline'] = $airline;
+        $result['rating'] = self::compound($airline);
+        $result['flights'] = self::getFlights($airline);
+        return $result;
+    }
+
+    public static function getFlights($airline) {
+        $flights = DB::table('airlines')
+            ->join('flight_data', 'flight_data.id', '=', $airline->id)
+            ->get()->toArray();
+
+        var_dump($flights);
+    }
 }
