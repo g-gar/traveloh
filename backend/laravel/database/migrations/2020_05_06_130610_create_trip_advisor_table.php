@@ -13,11 +13,11 @@ class CreateTripAdvisorTable extends Migration
      */
     public function up()
     {
-        Schema::create('trip_advisor', function (Blueprint $table) {
+        Schema::create('tripadvisor', function (Blueprint $table) {
             $table->integer('id')->unique()->nullable(0)->foreign('id')->references('id')->on('data')->onDelete('cascade')->onUpdate('cascade');
-            $table->integer('id_opinion');
-            $table->string('title');
-            $table->string('language');
+            $table->integer('id_opinion')->nullable(0);
+            $table->string('title')->nullable(0);
+            $table->string('language')->nullable(0);
         });
     }
 

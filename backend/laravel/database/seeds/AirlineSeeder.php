@@ -13,7 +13,7 @@ class AirlineSeeder extends Seeder
     public function run()
     {
         DB::table('airlines')->insert([
-            'tripadvisor_code' => '11831129',
+            'tripadvisor_code' => 11831129,
             'name' => 'Aerolinea De Antioquía',
             'tripadvisor_name' => 'Aerolinea-De-Antioquia'
         ]);

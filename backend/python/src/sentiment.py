@@ -14,8 +14,8 @@ if __name__ == "__main__":
 	reviews = analyze(translator.translate(args.text, dest='en'))
 
 	print(json.dumps(
-			{
-				'polarity_scores': vs
-			},
-			default=lambda o: o.__dict__, sort_keys=True, indent=4
-		))
+		{
+			'polarity_scores': vs
+		},
+		default=lambda o: o.__dict__, sort_keys=True, indent=4
+	))
