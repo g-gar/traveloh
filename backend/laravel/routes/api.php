@@ -15,4 +15,9 @@ use App\Http\Controllers\Controller\TuTiempoScrapperController;
 */
 
 Route::get('execute/scrapper/tutiempo.net/{code}', 'TuTiempoScrapperController@init');
+
 Route::get('execute/scrapper/tripadvisor.es/{code}', 'TripAdvisorScrapperController@init');
+Route::get('execute/sentiment/tripadvisor.es/{code}', 'TripAdvisorSentimentController@init');
+
+Route::get('execute/scrapper/twitter.com/{code}', 'TwitterScrapperController@init');
+Route::get('execute/sentiment/twitter.com/{code}', 'TwitterSentimentController@init');

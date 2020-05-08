@@ -13,7 +13,7 @@ requests==2.22.0
 six==1.14.0
 textblob==0.15.3
 urllib3==1.25.8
-vaderSentiment==3.2.1
+vaderSentiment==3.3.1
 Werkzeug==1.0.0
 beautifulsoup4==4.8.2
 selenium==3.141.0

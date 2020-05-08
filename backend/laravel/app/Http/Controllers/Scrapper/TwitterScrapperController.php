@@ -3,26 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
-/**
- * Scrapes tutiempo.net
- * 
- * @param airport
- * @return void
- * 
- */
-
-class TuTiempoScrapperController extends ScrapperController
+class TwitterScrapperController extends ScrapperController
 {
-	public static function generateCommands($airport_code){
+    public static function generateCommands($airport_code){
 		$commands = [];
-		$locations = DB::table('airports')->where('code', $airport_code)->pluck('location', 'location');
+		/* $locations = DB::table('airports')->where('code', $airport_code)->pluck('location', 'location');
 		foreach ($locations as $location => $airport) {
 			$commands[$location] = PathsController::get_python_executable() . ' ';
 			$commands[$location] .= realpath(PathsController::get_python_path() . '/src/scrappers/tutiempo.net.py') . ' --url ';
 			$commands[$location] .= "https://www.tutiempo.net/$location.html?datos=ultimas-24-horas";
-		}
+		} */
 		return $commands;
 	}
 
@@ -30,7 +21,7 @@ class TuTiempoScrapperController extends ScrapperController
 		foreach (json_decode($json, true) as $key => $json) {
 			try {
 				foreach ($json as $key => $value) {
-					$id = DB::table('data')->insertGetId([
+/* 					$id = DB::table('data')->insertGetId([
 						'identifier' => 'tutiempo',
 						'source' => 'tutiempo.net'
 					]);
@@ -46,7 +37,7 @@ class TuTiempoScrapperController extends ScrapperController
 						'humidity' => $value['humidity'],
 						'atmospheric_pressure' => $value['atmospheric_pressure'],
 						'timestamp' => now()
-					]);
+					]); */
 				}
 			} catch (\Throwable $th) {
 				throw $th;
