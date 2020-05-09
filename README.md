@@ -28,7 +28,7 @@ Laravel installation
 
 ```cmd
 cd backend/laravel
-# Create an empty file at database/database.sqlite
+# Create an empty file in database/database.sqlite
 composer install
 composer dump-autoload
 # Seed tables with php artisan migrate_refresh --seed
