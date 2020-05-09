@@ -13,7 +13,7 @@ class CreateTuTiempoTable extends Migration
      */
     public function up()
     {
-        Schema::create('tu_tiempo', function (Blueprint $table) {
+        Schema::create('tutiempo', function (Blueprint $table) {
             $table->integer('id')->unique()->nullable(0)->foreign('id')->references('id')->on('data')->onDelete('cascade')->onUpdate('cascade');
             $table->string('weather');
             $table->string('hour');
@@ -32,6 +32,6 @@ class CreateTuTiempoTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tu_tiempo');
+        Schema::dropIfExists('tutiempo');
     }
 }

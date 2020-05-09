@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class TuTiempo extends Model
 {
-    protected $table = 'tu_tiempo';
+    protected $table = 'tutiempo';
     protected $fillable = [
         'weather', 'temperature', 'hour', 'wind', 'humidity', 'amospheric_pressure',
         'timestamp'

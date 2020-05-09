@@ -37,7 +37,7 @@ class TuTiempoScrapperController extends ScrapperController
 					DB::table('weather_data')->insert([
 						'id' => $id
 					]);
-					DB::table('tu_tiempo')->insert([
+					DB::table('tutiempo')->insert([
 						'id' => $id,
 						'weather' => $value['weather'],
 						'hour' => $value['hour'],
