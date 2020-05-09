@@ -40,7 +40,7 @@ php artisan apidoc:generate
 
 Start the server by running `php backend/laravel/artisan serve`
 
-It runs by default on [http://localhost:8000/](http://localhost:8000/) and there is a documentation of the API under [http://localhots:8000/docs/](http://localhots:8000/docs/)
+It runs by default on [http://localhost:8000/](http://localhost:8000/) and there is a documentation of the available API routes under [http://localhots:8000/docs/](http://localhots:8000/docs/)
 
 ### Frontend
 
