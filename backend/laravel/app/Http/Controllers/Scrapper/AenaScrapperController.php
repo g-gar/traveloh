@@ -16,7 +16,7 @@ use App\Model\Airport;
 
 class AenaScrapperController extends ScrapperController implements FlightScrapperController
 {
-	private static Airport $airport;
+	private static $airport;
 
 	public static function generateCommands($airport_code){
 		$commands = [];

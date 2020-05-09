@@ -35,6 +35,7 @@ class AirportsController extends Controller
 	 * Returns all airport complete information
 	 */
     public static function getAirportsInfo(){
+        $result = [];
         foreach (Airport::all() as $airport) {
             $result[$airport->id] = self::getAirportInfo($airport->code);
         }
