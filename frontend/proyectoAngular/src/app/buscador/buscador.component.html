@@ -1,0 +1,113 @@
+<div class="body" *ngIf = "vuelo">
+    <h2>Buscador de vuelos</h2>
+    <form class="container" >
+        <div class="form-group">
+            <label>Numero de vuelo</label>
+            <input type="text" name="inputVuelo" [(ngModel)]="inputVuelo" placeholder="EJ:IB6585">
+            <div class="form-group">
+                <div class="input-group">
+                  <input class="form-control" placeholder="yyyy-mm-dd"
+                         name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker">
+                  <div class="input-group-append">
+                    <button class="btn" (click)="d.toggle()" type="button"><span class="material-icons">event</span></button>
+                  </div>
+                </div>
+            </div>
+            <input type="submit" value="Buscar" (click)="buscarVuelo()">
+            <div class="error container" *ngIf = "errorFecha">
+              <ngb-alert [dismissible]="false">
+                <strong>!Error!</strong> Debe elegir una fecha.
+              </ngb-alert>
+            </div>
+            <div class="error container" *ngIf = "errorInput">
+              <ngb-alert [dismissible]="false">
+                <strong>!Error!</strong> Debe introducir el número de vuelo.
+              </ngb-alert>
+            </div>
+        </div>
+        <hr class="rounded">
+        <div class="form-group">
+            <label>Seleccionar aeropuerto:</label>
+            <select class="custom-select select" name="selectedLevel" [(ngModel)]="selectedLevel" default="Choose Here">
+                Choose Here
+                <option *ngFor="let i of siglas" value="{{i.id}}">
+                    {{i.nombre}} ({{i.siglas}})
+                </option>
+            </select>
+            <small class="form-text text-muted">Solo se mostrarán los vuelos del día de hoy.</small>
+            <input type="submit" value="Buscar" (click)="listaAeropuerto()">
+        </div>
+       
+        <table class = "table" *ngIf="lista">
+            <thead class = "thead-dark">
+                <tr>
+                    <th scope="col">ID vuelo</th>
+                    <th scope="col">Aerolinea</th>
+                    <th scope="col">Destino</th>
+                    <th scope="col">Hora de salida</th>
+                    <th scope="col">Estado del vuelo</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let a of arrayVuelo">
+                    <th>{{a.IdVuelo}}</th>
+                    <th>{{a.Aerolinea}}</th>
+                    <th>{{a.Destino}}</th>
+                    <th>{{a.HoraProgOrigen}}</th>
+                    <th>{{a.Estado1}}</th>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+</div>
+<div class="detalles-vuelo container" *ngIf = "detalles">
+  <div class="volver">
+    <a href="buscador"><span class="material-icons">arrow_back_ios</span> Volver</a>
+  </div>
+  <div *ngFor="let e of arrayEspecifico">
+      <h3>
+          {{e.IdVuelo}}
+      </h3>        
+      <ul>
+          <li>Aerolinea: {{e.Aerolinea}}</li>
+          <li>Estado del vuelo: {{e.Estado1}} - {{e.Estado2}}</li>
+      </ul>
+
+  </div>
+  <div data-role="accordion" data-material="true"*ngFor="let e of arrayEspecifico">
+      <div class="frame active">
+          <div class="heading">Origen</div>
+          <div class="content">
+              <div class="p-2">
+                  <ul>
+                      <li> País origen: {{e.Origen}}</li>
+                      <li> Hora programada: {{e.HoraProgOrigen}}</li>
+                      <li> Hora estimada: {{e.HoraEstOrigen}} </li>
+                      <li> Terminal : {{e.TerminalOrigen}} </li>
+                      <li> Gate: {{e.GateOrigen}} </li>
+                  </ul>
+              </div>
+          </div>
+      </div>
+      <div class="frame">
+          <div class="heading">Destino</div>
+          <div class="content">
+              <div class="p-2">
+                  <ul>
+                      <li> País destino: {{e.Destino}}</li>
+                      <li> Hora programada: {{e.HoraProgDestino}}</li>
+                      <li> Hora estimada: {{e.HoraEstDestino}} </li>
+                      <li> Terminal: {{e.TerminalDestino}} </li>
+                      <li> Gate: {{e.GateDestino}} </li>
+                  </ul>
+              </div>
+          </div>
+      </div>
+    </div>
+</div>
+<div class="no-encontrado container" *ngIf="no_encontrado">
+  <h3>Ha ocurrido un problema interno</h3>
+  <img src="../../assets/nubes.jpg" alt="">
+  <a href="buscador"> Volver a intentarlo</a>
+</div>
+
