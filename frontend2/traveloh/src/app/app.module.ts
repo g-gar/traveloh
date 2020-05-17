@@ -11,6 +11,8 @@ import { ScrappersComponent } from './view/admin/scrappers/scrappers.component';
 import { StatsComponent } from './view/admin/stats/stats.component';
 import { Token } from './interceptor/token.interceptor';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { Airport } from './model/airport.model';
+import { Airline } from './model/airline.model';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
     RankingComponent,
     ScrappersComponent,
     StatsComponent,
+    Airport,
+    Airline
   ],
   imports: [
     BrowserModule,
