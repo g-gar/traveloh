@@ -9,6 +9,8 @@ import { BrowserComponent } from './view/guest/browser/browser.component';
 import { RankingComponent } from './view/guest/ranking/ranking.component';
 import { ScrappersComponent } from './view/admin/scrappers/scrappers.component';
 import { StatsComponent } from './view/admin/stats/stats.component';
+import { Token } from './interceptor/token.interceptor';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,13 @@ import { StatsComponent } from './view/admin/stats/stats.component';
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: Token,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
