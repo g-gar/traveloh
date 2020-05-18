@@ -1,9 +1,22 @@
-// body {
-//     background-image: url("https://static.vecteezy.com/system/resources/previews/000/100/452/non_2x/vector-clouds-pattern-background.jpg");
-//     background-repeat: repeat-y repeat-x;
-// }
 
 .container {
     padding-top: 2%;
     background-color:white;
+}
+
+.container{
+    -webkit-box-shadow: 0px 0px 25px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 25px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 25px 0px rgba(0,0,0,0.75);
+}
+
+#hero-image {
+    height: 580px;
+    padding-top: 1px;
+    background: #e8eced url('https://previews.123rf.com/images/alexmillos/alexmillos1412/alexmillos141200291/34969976-aviones-volando-alrededor-del-globo-dise%C3%B1o-de-ilustraci%C3%B3n-sobre-un-fondo-azul.jpg') no-repeat center;
+	background-size: 2000px;
+}
+
+.btn {
+   margin-left: 520px;
 }

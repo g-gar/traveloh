@@ -1,14 +1,72 @@
 <body>
-
-    <div class ="container">
-    
-        <h1>Esta es la ventana inicial</h1>
-        <p>imagen1.</p>
-        <p>imagen2</p>
-        <p>imagen3</p>
-        <p>imagen4</p>
-        <p>imagen5</p>
+    <div id="hero-image">
+        <div class="wrapper">
+    <h2>FMG Technologies les presenta su aplicación sobre los vuelos de los principales aeropuertos de España<br/>
+			  <br/>
+		  <strong>Toda la información a su alcance</strong></h2>
+       
+    	</div>
     </div>
+
+    <form class="container" >
+        <div class="form-group">
+            <label>Numero de vuelo</label>
+            <input type="text" name="inputVuelo" [(ngModel)]="inputVuelo" placeholder="EJ:IB6585">
+          
+            <div class="error container" *ngIf = "errorFecha">
+              <ngb-alert [dismissible]="false">
+                <strong>!Error!</strong> Debe elegir una fecha.
+              </ngb-alert>
+            </div>
+            <div class="error container" *ngIf = "errorInput">
+              <ngb-alert [dismissible]="false">
+                <strong>!Error!</strong> Debe introducir el número de vuelo.
+              </ngb-alert>
+            </div>
+        </div>
+        <hr class="rounded">
+        <div class="form-group">
+            <label>Origen</label>
+            <select class="custom-select select" name="selectedLevel" [(ngModel)]="selectedLevel" default="Choose Here">
+                Choose Here
+                <option *ngFor="let i of siglas" value="{{i.id}}">
+                    {{i.nombre}} ({{i.siglas}})
+                </option>
+            </select>
+            <label>Destino</label>
+            <select class="custom-select select" name="selectedLevel1" [(ngModel)]="selectedLevel" default="Choose Here">
+                Choose Here
+                <option *ngFor="let i of siglas" value="{{i.id}}">
+                    {{i.nombre}} ({{i.siglas}})
+                </option>
+            </select>
+           
+            <br><br>
+            <input class="btn btn-primary text-center" type="submit" value="Buscar" (click)="listaAeropuerto()">
+            <br><br>
+        </div>
+       
+        <table class = "table" *ngIf="lista">
+            <thead class = "thead-dark">
+                <tr>
+                    <th scope="col">ID vuelo</th>
+                    <th scope="col">Aerolinea</th>
+                    <th scope="col">Destino</th>
+                    <th scope="col">Hora de salida</th>
+                    <th scope="col">Estado del vuelo</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let a of arrayVuelo">
+                    <th>{{a.IdVuelo}}</th>
+                    <th>{{a.Aerolinea}}</th>
+                    <th>{{a.Destino}}</th>
+                    <th>{{a.HoraProgOrigen}}</th>
+                    <th>{{a.Estado1}}</th>
+                </tr>
+            </tbody>
+        </table>
+    </form>
         
 </body>
     
