@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
 import { SearchComponent } from './view/guest/search/search.component';
 import { LoginComponent } from './view/guest/login/login.component';
 import { BrowserComponent } from './view/guest/browser/browser.component';
@@ -21,7 +20,6 @@ import { FlightService } from './service/flight.service';
 
 @NgModule({
   declarations: [
-    AppComponent,
     SearchComponent,
     LoginComponent,
     BrowserComponent,
@@ -48,6 +46,6 @@ import { FlightService } from './service/flight.service';
     AirlineService,
     FlightService    
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [SearchComponent]
 })
 export class AppModule { }
