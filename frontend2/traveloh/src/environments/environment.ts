@@ -13,9 +13,12 @@ export const environment = {
       scrapper: '/execute/scrapper',
       sentiment: '/execute/sentiment/',
       info: {
-        airport: '/info/airports/',
-        airline: '/info/airlines/',
-        flight: '/info/flights/'
+        airports: '/info/airports/',
+        airport: code => `/info/airports/${code}`,
+        airlines: '/info/airlines/',
+        airline: code => `/info/airlines/${code}`,
+        flights: '/info/flights/',
+        flight: code => `/info/flights/${code}`,
       }
     }
   }
