@@ -10,9 +10,14 @@ import { RankingComponent } from './view/guest/ranking/ranking.component';
 import { ScrappersComponent } from './view/admin/scrappers/scrappers.component';
 import { StatsComponent } from './view/admin/stats/stats.component';
 import { Token } from './interceptor/token.interceptor';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { Airport } from './model/airport.model';
-import { Airline } from './model/airline.model';
+import { HttpClientModule, HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
+import { AjaxService } from './service/ajax.service';
+import { AuthService } from './service/auth.service';
+import { AnalyticsService } from './service/analytics.service';
+import { ScrapperService } from './service/scrapper.service';
+import { AirportService } from './service/airport.service';
+import { AirlineService } from './service/airline.service';
+import { FlightService } from './service/flight.service';
 
 @NgModule({
   declarations: [
@@ -23,19 +28,25 @@ import { Airline } from './model/airline.model';
     RankingComponent,
     ScrappersComponent,
     StatsComponent,
-    Airport,
-    Airline
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: Token,
       multi: true
-    }
+    },
+    AjaxService,
+    AuthService,
+    AnalyticsService,
+    ScrapperService,
+    AirportService,
+    AirlineService,
+    FlightService    
   ],
   bootstrap: [AppComponent]
 })

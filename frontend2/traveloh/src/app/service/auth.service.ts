@@ -22,7 +22,7 @@ export class AuthService {
 
   decodeToken() {
     if (this.jwtToken) {
-    this.decodedToken = jwt_decode(this.jwtToken);
+      this.decodedToken = jwt_decode(this.jwtToken);
     }
   }
 
@@ -32,12 +32,12 @@ export class AuthService {
 
   getUser() {
     this.decodeToken();
-    return this.decodedToken ? this.decodedToken.displayname : null;
+    return this.decodedToken ? this.decodedToken.username : null;
   }
 
-  getEmailId() {
+  getPassword() {
     this.decodeToken();
-    return this.decodedToken ? this.decodedToken.email : null;
+    return this.decodedToken ? this.decodedToken.password : null;
   }
 
   getExpiryTime() {
@@ -45,6 +45,9 @@ export class AuthService {
     return this.decodedToken ? Number(this.decodedToken.exp) : null;
   }
 
+  /**
+   * TODO: remove since this should be server-side
+   */
   isTokenExpired(): boolean {
     const expiryTime: number = this.getExpiryTime();
     if (expiryTime) {
@@ -55,12 +58,18 @@ export class AuthService {
   }
 
   revalidateIfNeeded(): AuthService {
-
-    if (this.isTokenExpired() && environment.production) {
+    if (this.jwtToken != null) {
+      this.decodeToken();
       let url: string = `${environment.API.protocol}://${environment.API.host}:${environment.API.port}${environment.API.paths.authentication}`;
-      new AjaxService(this.injector.get(HttpClient), this).postJson(url, {}).then((token: string) => {
-        this.setToken(token);
-      })
+      this.injector.get(AjaxService)
+        .postJson(url, {
+          user: this.getUser(),
+          password: this.getPassword()
+        }).then((token: string) => {
+          this.setToken(token);
+        }).catch(error => {
+          console.log(error);
+        })
     }
     return this;
   }

@@ -15,6 +15,6 @@ export class Token implements HttpInterceptor {
    constructor(){}
 
    intercept(request: HttpRequest<any>, next: HttpHandler) : Observable<HttpEvent<any>> {
-
+    return null;
    }
 }
