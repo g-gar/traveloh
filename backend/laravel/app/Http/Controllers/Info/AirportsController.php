@@ -37,7 +37,7 @@ class AirportsController extends Controller
     public static function getAirportsInfo(){
         $result = [];
         foreach (Airport::all() as $airport) {
-            $result[$airport->id] = self::getAirportInfo($airport->code);
+            array_push($result, self::getAirportInfo($airport->code));
         }
         return $result;
     }
@@ -53,7 +53,7 @@ class AirportsController extends Controller
             return AirlinesController::getAirlineInfo($airline->id);
         }, self::getAirlines($airport));
         $result['rating'] = self::compound($airport);
-        return $result;
+        return $airport;
     }
 
     public static function getAirlines($airport) {
