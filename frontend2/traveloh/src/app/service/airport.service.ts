@@ -40,4 +40,10 @@ export class AirportService {
     let url: string = ajax.buildUrlFromEnvironment(environment.API.paths.info.airport(code));
     return ajax.get<Airport>(url);
   }
+
+  getRanking(): Promise<Array<[number, number]>> {
+    let ajax: AjaxService = this.injector.get(AjaxService);
+    let url: string = ajax.buildUrlFromEnvironment(environment.API.paths.info.airportRanking);
+    return ajax.get<Array<[number, number]>>(url);
+  }
 }
