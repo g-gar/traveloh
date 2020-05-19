@@ -14,12 +14,12 @@ class AirlinesController extends Controller
     public static function rank() {
         $results = [];
         foreach (Airline::all() as $airline) {
-            $results[$airline->id] = self::compound($airline);
+            $results[$airline->id] = self::getRating($airline);
         }
         return $results;
     }
 
-    public static function compound($airline) {
+    public static function getRating($airline) {
         $result = 0.0;
         $temp = DB::table('sentiment_analysis_data')
                 ->where('sentiment_analysis_data.id_airline', '=', $airline->id)
@@ -39,21 +39,18 @@ class AirlinesController extends Controller
     /**
 	 * Returns all airlines complete information
 	 */
-    public static function getAirlinesInfo() {
-        foreach (Airline::all() as $airline) {
-            $results[$airline->id] = self::getAirlineInfo($airline->id);
-        }
-        return $results;
+    public static function getAirlines() {
+        return Airline::all();
     }
 
     /**
 	 * Returns an airlines complete information
 	 */
-    public static function getAirlineInfo($id) {
+    public static function getAirline($id) {
         $airline = Airline::where('id', $id)->firstOrFail();
         $result['airline'] = $airline;
-        $result['rating'] = self::compound($airline);
         $result['flights'] = self::getFlights($airline);
+        $result['rating'] = self::getRating($airline);
         return $result;
     }
 

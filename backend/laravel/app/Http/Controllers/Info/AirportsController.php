@@ -12,20 +12,20 @@ class AirportsController extends Controller
     /**
 	 * Returns the airports ranked by rating
 	 */
-    public static function rank() {
+    public static function getRanking() {
         $results = [];
         foreach (Airport::all() as $airport) {
-            $results[$airport->id] = self::compound($airport);
+            $results[$airport->id] = self::getRating($airport);
         }
         return $results;
     }
 
-    public static function compound($airport) {
+    public static function getRating($airport) {
         $result = 0.0;
         try {
             $airlines = self::getAirlines($airport);
             $result = array_reduce($airlines, function($accumulator, $airline) {
-                return $accumulator + AirlinesController::compound($airline);
+                return $accumulator + AirlinesController::getRating($airline);
             }, 0.0) / count($airlines);
         } catch (\Throwable $th) {}
         return $result;
@@ -34,25 +34,21 @@ class AirportsController extends Controller
     /**
 	 * Returns all airport complete information
 	 */
-    public static function getAirportsInfo(){
-        $result = [];
-        foreach (Airport::all() as $airport) {
-            array_push($result, self::getAirportInfo($airport->code));
-        }
-        return $result;
+    public static function getAirports(){
+        return Airport::all();
     }
 
     /**
 	 * Returns an airport complete information
      * @urlParam airport required The airport code. Example: MAD
 	 */
-    public static function getAirportInfo($code) {
+    public static function getAirport($code) {
         $airport = Airport::where('code', '=', $code)->firstOrFail();
         $result['airport'] = $airport;
         $result['airlines'] = array_map(function($airline){
-            return AirlinesController::getAirlineInfo($airline->id);
+            return AirlinesController::getAirlines($airline->id);
         }, self::getAirlines($airport));
-        $result['rating'] = self::compound($airport);
+        $result['rating'] = self::getRating($airport);
         return $airport;
     }
 
