@@ -1,8 +1,8 @@
 import { Injectable, Injector } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { AppModule } from '../app.module';
 import { AuthService } from './auth.service';
+import { Observable, Subscription } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -44,13 +44,13 @@ export class AjaxService {
     }));
   }
 
-  get<T>(url: string, headers: HttpHeaders): Promise<T> {
-    return this.http.get(url, { headers: headers })
-    .toPromise()
-    .then(response => response as T);
+  get<T>(url: string, headers): Promise<T> {
+    return this.http.get<T>(url, {headers: headers})
+      .toPromise()
+      .then(response => response as T);
   }
 
   buildUrlFromEnvironment(path: string): string {
-    return `${environment.API.protocol}://${environment.API.host}:${environment.API.port}`;
+    return `${environment.API.protocol}://${environment.API.host}:${environment.API.port}${path}`;
   }
 }

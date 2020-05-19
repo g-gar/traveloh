@@ -9,7 +9,7 @@ import { RankingComponent } from './view/guest/ranking/ranking.component';
 import { ScrappersComponent } from './view/admin/scrappers/scrappers.component';
 import { StatsComponent } from './view/admin/stats/stats.component';
 import { Token } from './interceptor/token.interceptor';
-import { HttpClientModule, HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AjaxService } from './service/ajax.service';
 import { AuthService } from './service/auth.service';
 import { AnalyticsService } from './service/analytics.service';
