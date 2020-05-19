@@ -25,4 +25,10 @@ export class AirlineService {
     let url: string = ajax.buildUrlFromEnvironment(environment.API.paths.info.airline(id));
     return ajax.get<AirlineList>(url);
   }
+
+  getRanking(): Promise<Array<[number, number]>> {
+    let ajax: AjaxService = this.injector.get(AjaxService);
+    let url: string = ajax.buildUrlFromEnvironment(environment.API.paths.info.airlineRanking);
+    return ajax.get<Array<[number, number]>>(url);
+  }
 }

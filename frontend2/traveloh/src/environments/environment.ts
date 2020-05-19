@@ -15,8 +15,10 @@ export const environment = {
       info: {
         airports: '/info/airports/',
         airport: (code: string) => `/info/airports/${code}`,
+        airportRanking: '/info/airports/ranking/',
         airlines: '/info/airlines/',
         airline: (code: number) => `/info/airlines/${code}`,
+        airlineRanking: '/info/airlines/ranking/',
         flights: '/info/flights/',
         flight: (code: string) => `/info/flights/${code}`,
       }
