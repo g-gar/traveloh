@@ -14,11 +14,11 @@ export const environment = {
       sentiment: '/execute/sentiment/',
       info: {
         airports: '/info/airports/',
-        airport: code => `/info/airports/${code}`,
+        airport: (code: string) => `/info/airports/${code}`,
         airlines: '/info/airlines/',
-        airline: code => `/info/airlines/${code}`,
+        airline: (code: number) => `/info/airlines/${code}`,
         flights: '/info/flights/',
-        flight: code => `/info/flights/${code}`,
+        flight: (code: string) => `/info/flights/${code}`,
       }
     }
   }

@@ -4,6 +4,9 @@ import { environment } from 'src/environments/environment';
 import { Airport } from 'src/app/model/airport.model';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
+import { AirportList } from 'src/app/model/airport-list.model';
+import { AirportService } from 'src/app/service/airport.service';
+import { AirlineService } from 'src/app/service/airline.service';
 
 @Component({
   selector: 'app-search',
@@ -12,17 +15,14 @@ import { finalize } from 'rxjs/operators';
 })
 export class SearchComponent implements OnInit {
 
-  constructor(private ajax: AjaxService) {
+  constructor(private injector: Injector) {
 
    }
 
   ngOnInit(): void {
 
-    let url: string = this.ajax.buildUrlFromEnvironment(environment.API.paths.info.airports);
-    
-    this.ajax.getJson<Array<Airport>>(url).then(e => e.forEach(console.log))
-
-    
+    //new AirlineService(this.injector).getAirlines().then(console.log)
+    //new AirportService(this.injector).getAirport("MAD").then(console.log)
   }
 
 }

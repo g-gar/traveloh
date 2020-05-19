@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 
 import { Airport } from 'src/app/model/airport.model';
 import { AjaxService } from './ajax.service';
+import { AirportList } from '../model/airport-list.model';
 
 @Injectable({
   providedIn: 'root'
@@ -28,4 +29,15 @@ export class AirportService {
     return null;
   }
 
+  getAirports(): Promise<AirportList> {
+    let ajax: AjaxService = this.injector.get(AjaxService);
+    let url: string = ajax.buildUrlFromEnvironment(environment.API.paths.info.airports);
+    return ajax.get<AirportList>(url);
+  }
+
+  getAirport(code: string): Promise<Airport> {
+    let ajax: AjaxService = this.injector.get(AjaxService);
+    let url: string = ajax.buildUrlFromEnvironment(environment.API.paths.info.airport(code));
+    return ajax.get<Airport>(url);
+  }
 }

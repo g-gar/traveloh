@@ -38,16 +38,8 @@ export class AjaxService {
       .then(response => response as T);
   }
 
-  getJson<T>(url: string): Promise<T> {
-    return this.get<T>(url, new HttpHeaders({
-      'Accept': 'application/json'
-    }));
-  }
-
-  get<T>(url: string, headers): Promise<T> {
-    return this.http.get<T>(url, {headers: headers})
-      .toPromise()
-      .then(response => response as T);
+  get<T>(url: string, headers?: HttpHeaders): Promise<T> {
+    return this.http.get<T>(url, {headers: headers}).toPromise<T>();
   }
 
   buildUrlFromEnvironment(path: string): string {

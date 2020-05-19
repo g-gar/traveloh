@@ -1,5 +1,8 @@
+import { AirlineList } from './airline-list.model';
+import { AirportListItem } from './airport-list-item.model';
+
 export class Airport {
 
-   constructor(public id: number, public code: string, public location: string) {}
+   constructor(airport: AirportListItem, airlines: AirlineList, rating: number) {}
 
 }
