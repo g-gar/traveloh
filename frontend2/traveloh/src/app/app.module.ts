@@ -17,15 +17,24 @@ import { ScrapperService } from './service/scrapper.service';
 import { AirportService } from './service/airport.service';
 import { AirlineService } from './service/airline.service';
 import { FlightService } from './service/flight.service';
+import { HeaderComponent } from './view/headers/header/header.component';
+import { HeaderAdminComponent } from './view/headers/header-admin/header-admin.component';
+import { FooterComponent } from './view/footer/footer.component';
+import { AppComponent } from './app.component';
+
 
 @NgModule({
   declarations: [
+    AppComponent,
     SearchComponent,
     LoginComponent,
     BrowserComponent,
     RankingComponent,
     ScrappersComponent,
     StatsComponent,
+    HeaderComponent,
+    HeaderAdminComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,6 +55,6 @@ import { FlightService } from './service/flight.service';
     AirlineService,
     FlightService    
   ],
-  bootstrap: [SearchComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
