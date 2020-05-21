@@ -12,11 +12,39 @@
 #hero-image {
     height: 580px;
     padding-top: 1px;
-    background-color: #C3C3C3;
-    background-size: 2000px;
+    background: #e8eced url('https://blog.evobanco.com/wp-content/uploads/Captura-de-pantalla-2016-05-11-a-las-21.31.25.png') no-repeat center;
+	background-size: 2300px;
+}
+#textohero {
+    margin: 320px 0 40px 0;
+    margin-top: 10px;
+    font-size: 42px;
     text-align: center;
+
 }
 
 .btn {
    margin-left: 520px;
+}
+.wrapper {
+    margin: 0 auto;
+    padding: 0 10px;
+    width: 940px;
+}
+.wrapper1 {
+    margin: 0 auto;
+    padding: 0 10px;
+    width: 940px;
+}
+#primary-content {
+    background-color: white;
+    padding: 60px 0;
+    text-align: center;
+}
+#primary-content h3 {
+    display: block;
+    margin: 0 auto 20px auto;
+    width: 400px;
+    border-bottom: 1px solid #02b8dd;
+    padding: 0 0 20px 0;
 }
