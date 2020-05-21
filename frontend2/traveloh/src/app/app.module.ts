@@ -6,8 +6,6 @@ import { SearchComponent } from './view/guest/search/search.component';
 import { LoginComponent } from './view/guest/login/login.component';
 import { BrowserComponent } from './view/guest/browser/browser.component';
 import { RankingComponent } from './view/guest/ranking/ranking.component';
-import { ScrappersComponent } from './view/admin/scrappers/scrappers.component';
-import { StatsComponent } from './view/admin/stats/stats.component';
 import { Token } from './interceptor/token.interceptor';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AjaxService } from './service/ajax.service';
@@ -21,6 +19,7 @@ import { HeaderComponent } from './view/headers/header/header.component';
 import { HeaderAdminComponent } from './view/headers/header-admin/header-admin.component';
 import { FooterComponent } from './view/footer/footer.component';
 import { AppComponent } from './app.component';
+import { AdminlandComponent } from './view/admin/adminland/adminland.component';
 
 
 @NgModule({
@@ -30,11 +29,10 @@ import { AppComponent } from './app.component';
     LoginComponent,
     BrowserComponent,
     RankingComponent,
-    ScrappersComponent,
-    StatsComponent,
     HeaderComponent,
     HeaderAdminComponent,
     FooterComponent,
+    AdminlandComponent,
   ],
   imports: [
     BrowserModule,
