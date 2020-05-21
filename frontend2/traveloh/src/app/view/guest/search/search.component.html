@@ -1,69 +1,40 @@
-<app-header></app-header>
+
 <div id="hero-image">
     <div class="wrapper">
-<h2>Traveloh les ofrece la posibilidad de consultar en vivo toda la información aérea relevante de los principales aeropuertos de españa<br/>
-          <br/>
-      <strong>Toda la información a su alcance</strong></h2>
+        
    
     </div>
 </div>
-<form class="container" >
+
+<div id="primary-content">
+    <div class="wrapper">
+    <article>
+        <h3>¿Quienes somos?</h3>
+        <p>FMG Technologies crea Traveloh como propuesta de solución a uno de los mayores problemas de nuestro día a día: La gestión del tiempo<br>Por ello, hemos llevado a
+            cabo una aplicación web que nos permita acceder a toda la información relevante sobre los vuelos de los principales aeropuertos de España
+        </p>
+        
+    </article>
+</div>
+    
+</div>
+
+
+<form class="container mt-5" >
     <div class="form-group">
         <label>Numero de vuelo</label>
-        <input type="text" name="inputVuelo" [(ngModel)]="inputVuelo" placeholder="EJ:IB6585">
-      
-        <div class="error container" *ngIf = "errorFecha">
-          <ngb-alert [dismissible]="false">
-            <strong>!Error!</strong> Debe elegir una fecha.
-          </ngb-alert>
-        </div>
-        <div class="error container" *ngIf = "errorInput">
-          <ngb-alert [dismissible]="false">
-            <strong>!Error!</strong> Debe introducir el número de vuelo.
-          </ngb-alert>
-        </div>
+        <input type="text" class="form-control" id="usr">
     </div>
     <hr class="rounded">
     <div class="form-group">
         <label>Origen</label>
-        <select class="custom-select select" name="selectedLevel" [(ngModel)]="selectedLevel" default="Choose Here">
-            Choose Here
-            <option *ngFor="let i of siglas" value="{{i.id}}">
-                {{i.nombre}} ({{i.siglas}})
-            </option>
-        </select>
+        <select class="custom-select select" name="selectedLevel"  default="Choose Here"></select>
         <label>Destino</label>
-        <select class="custom-select select" name="selectedLevel1" [(ngModel)]="selectedLevel" default="Choose Here">
-            Choose Here
-            <option *ngFor="let i of siglas" value="{{i.id}}">
-                {{i.nombre}} ({{i.siglas}})
-            </option>
+        <select class="custom-select select" name="selectedLevel1"  default="Choose Here">
         </select>
-       
         <br><br>
-        <input class="btn btn-primary text-center" type="submit" value="Buscar" (click)="listaAeropuerto()">
+        <input class="btn btn-primary text-center" type="submit" value="Buscar" >
         <br><br>
     </div>
    
-    <table class = "table" *ngIf="lista">
-        <thead class = "thead-dark">
-            <tr>
-                <th scope="col">ID vuelo</th>
-                <th scope="col">Aerolinea</th>
-                <th scope="col">Destino</th>
-                <th scope="col">Hora de salida</th>
-                <th scope="col">Estado del vuelo</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let a of arrayVuelo">
-                <th>{{a.IdVuelo}}</th>
-                <th>{{a.Aerolinea}}</th>
-                <th>{{a.Destino}}</th>
-                <th>{{a.HoraProgOrigen}}</th>
-                <th>{{a.Estado1}}</th>
-            </tr>
-        </tbody>
-    </table>
 </form>
-
