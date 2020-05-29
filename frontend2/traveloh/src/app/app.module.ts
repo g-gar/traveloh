@@ -51,7 +51,7 @@ import { AdminlandComponent } from './view/admin/adminland/adminland.component';
     ScrapperService,
     AirportService,
     AirlineService,
-    FlightService    
+    FlightService
   ],
   bootstrap: [AppComponent]
 })
