@@ -53,7 +53,7 @@ import { AppComponent } from './app.component';
     ScrapperService,
     AirportService,
     AirlineService,
-    FlightService    
+    FlightService
   ],
   bootstrap: [AppComponent]
 })
