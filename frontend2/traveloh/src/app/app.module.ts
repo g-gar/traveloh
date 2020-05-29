@@ -20,6 +20,7 @@ import { HeaderAdminComponent } from './view/headers/header-admin/header-admin.c
 import { FooterComponent } from './view/footer/footer.component';
 import { AppComponent } from './app.component';
 import { AdminlandComponent } from './view/admin/adminland/adminland.component';
+import { ResultComponent } from './view/guest/result/result.component';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { AdminlandComponent } from './view/admin/adminland/adminland.component';
     HeaderAdminComponent,
     FooterComponent,
     AdminlandComponent,
+    ResultComponent,
   ],
   imports: [
     BrowserModule,

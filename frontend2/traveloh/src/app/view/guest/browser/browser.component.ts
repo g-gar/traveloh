@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AirlineService } from 'src/app/service/airline.service';
+import { AirportService } from 'src/app/service/airport.service';
+import { AirportList } from 'src/app/model/airport-list.model';
 
 @Component({
   selector: 'app-browser',
@@ -6,10 +9,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./browser.component.scss']
 })
 export class BrowserComponent implements OnInit {
+  lists: AirportList[]
+    
+  constructor(private airportService: AirportService) {
+  }
 
-  constructor() { }
-
-  ngOnInit(): void {
+  ngOnInit() {
+    this.getAirports()
+  }
+  getAirports():void{
+    this.airportService.getAirports()
   }
 
 }
