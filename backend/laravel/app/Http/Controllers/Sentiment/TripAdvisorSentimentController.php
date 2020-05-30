@@ -36,5 +36,7 @@ class TripAdvisorSentimentController extends SentimentController
             $s->compound = $r->compound;
             $s->save();
         }
+
+        return "hola k ase";
     }
 }

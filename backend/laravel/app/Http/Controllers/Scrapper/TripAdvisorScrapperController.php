@@ -25,27 +25,25 @@ class TripAdvisorScrapperController extends ScrapperController
 
 		foreach (json_decode($json, true) as $key => $json) {
 			try {
-				foreach ($json as $key => $value) {
-					$id = DB::table('data')->insertGetId([
-						'identifier' => 'tripadvisor',
-						'source' => 'tripadvisor.es'
-					]);
-					DB::table('sentiment_analysis_data')->insert([
-                        'id' => $id,
-                        'positive' => null,
-                        'negative' => null,
-                        'neutral' => null,
-                        'compound' => null,
-						'text' => "\"".$value['text']."\"",
-						'id_airline' => self::$airline->id
-					]);
-					DB::table('tripadvisor')->insert([
-						'id' => $id,
-                        'language' => $value['language'],
-                        'title' => $value['title'],
-                        'id_opinion' => $value['reviewId']
-					]);
-				}
+				$id = DB::table('data')->insertGetId([
+					'identifier' => 'tripadvisor',
+					'source' => 'tripadvisor.es'
+				]);
+				DB::table('sentiment_analysis_data')->insert([
+					'id' => $id,
+					'positive' => null,
+					'negative' => null,
+					'neutral' => null,
+					'compound' => null,
+					'text' => "\"".$json['text']."\"",
+					'id_airline' => self::$airline->id
+				]);
+				DB::table('tripadvisor')->insert([
+					'id' => $id,
+					'language' => $json['language'],
+					'title' => $json['title'],
+					'id_opinion' => $json['reviewId']
+				]);
 			} catch (\Throwable $th) {
 				throw $th;
 			}
