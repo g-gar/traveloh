@@ -10,6 +10,7 @@ export class AdminlandComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    
   }
 
 }

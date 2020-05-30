@@ -19,8 +19,9 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th>Primera aero - 8</th>
+        <tr *ngFor="let id of ids; let i = index">
+          <td> {{ids[i]}}</td>
+          <td> {{compound[i]}}</td>
         </tr>
      
       </tbody>
@@ -61,8 +62,8 @@
     <tbody>
       <tr class="let list of lists">
         <td>
-          <span>{{ list.code }}</span>
         </td>
+
 
       </tr>
     </tbody>

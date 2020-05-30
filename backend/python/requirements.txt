@@ -19,7 +19,7 @@ beautifulsoup4==4.8.2
 selenium==3.141.0
 selenium-wire==1.0.11
 webdriver-manager==2.3.0
-chromedriver-py==81.0.4044.69
+chromedriver-py==83.0.4103.39
 twitterscraper==0.2.7
 
 coala-utils~=0.5.0
