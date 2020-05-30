@@ -6,14 +6,54 @@ import { AenaData } from './data/flight/aena-data.model';
 
 export class Flight {
 
-   public flightData: FlightData;
-   public weatherData: WeatherData;
-   constructor(public flight: FlightListItem, private flightInfo: Object, private weatherInfo: Object) {
+   public id: number;
+   public code: string;
+
+   public flightType: string;
+   public hour: number; // hora programada
+   public destination: string;
+   public departureHour: number; // hora real
+   public company: string;
+   public terminal: string;
+
+   public weatherType: string;
+   public weather: string;
+   public temperature: number;
+   public wind: string;
+   public humidity: number;
+   public atmosphericPressure: number;
+
+
+   constructor(flight: Object, flightInfo: Object, weatherInfo: Object) {
+
+      this.id = flight['id'];
+      this.code = flightInfo['data']['flight_code'];
+
+      this.flightType = flightInfo['type'];
+      this.hour = flightInfo['data']['hour'];
+      this.destination = flightInfo['data']['destination'];
+      this.company = flightInfo['data']['company'];
+      this.terminal = flightInfo['data']['terminal'];
+
+      this.weatherType = weatherInfo['type'];
+      this.weather = weatherInfo['data']['weather'];
+      this.temperature = weatherInfo['data']['temperature'];
+      this.wind = weatherInfo['data']['wind'];
+      this.humidity = weatherInfo['data']['humidity'];
+      this.atmosphericPressure = weatherInfo['data']['atmospheric_pressure'];
+      
+
+      /* console.log(flight, flightInfo, weatherInfo);
+
+      if (!!flight && 'id' in flight && 'data' in flightInfo && 'flight_code' in flightInfo) {
+         this.info = new FlightListItem(flight['id'], flightInfo['flight_code']);
+      }
 
       if (!!flightInfo && 'type' in flightInfo) {
+         console.log(flightInfo)
          switch (flightInfo['type']) {
             case 'aena': this.flightData = flightInfo['data'] as AenaData; break;
-            default: throw Error(`${flightInfo['type']} not supported`)
+            default: throw Error(`Type ${flightInfo['type']} not supported`)
          }
       }
 
@@ -22,7 +62,7 @@ export class Flight {
             case 'tutiempo': this.weatherData = weatherInfo['data'] as TuTiempoData; break;
             default: throw Error(`${weatherInfo['type']} not supported`)
          }
-      }
+      } */
    }
 
 }

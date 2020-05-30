@@ -1,62 +1,69 @@
+<div id="primary-content">
+  <div class="wrapper">
+  <article>
+      <h3>Su vuelo</h3>
+      <p class="text-muted">A continuación se le facilita la información más importante sobre su vuelo, así como la condición meteorológica esperada
+      </p>
+      
+  </article>
+</div>
+  
+</div>
+
+
+<div class="row justify-content-center">
+  <div class="col-6 align-self-center">
+      
+      <ul class="list-group">
+          <li class="list-group-item text-muted">Hora - {{flight.hour}}</li>
+          <li class="list-group-item text-muted">Aeropuerto - </li>
+          <li class="list-group-item text-muted">Destino - {{flight.destination}}</li>
+          <li class="list-group-item text-muted">Terminal - {{flight.terminal}}</li>
+        </ul>
+
+  </div>
+</div>
+
+
+<div class="row justify-content-center">
+  <div class="col-9 align-self-center">
+      <table class="table mt-5 text-center">
+          <thead>
+            <tr>
+              <th scope="col">Predicción</th>
+              <th scope="col">Temperatura</th>
+              <th scope="col">Viento</th>
+              <th scope="col">Humedad</th>
+              <th scope="col">Presión Atmosférica</th>
+      
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{{flight.weather}}</td>
+              <td>{{flight.temperature}}</td>
+              <td>{{flight.wind}}</td>
+              <td>{{flight.humidity}}</td>
+              <td>{{flight.atmosphericPressure}}</td>
+            </tr>
+          </tbody>
+        </table>
+  </div>
+</div>
 
 <div id="primary-content">
-    <div class="wrapper">
-    <article>
-        <h3>Su vuelo</h3>
-        <p>A continuación se le facilita la información más importante sobre su vuelo, así como la condición meteorológica esperada
-        </p>
-        
-    </article>
+  <div class="wrapper">
+  <article>
+      <h3>Valoraciones previas</h3>
+  </article>
 </div>
-    
-</div>
+  
 
-
-<div class="row justify-content-md-center">
-    <div class="col-md">
-        
-        <ul class="list-group">
-            <li class="list-group-item">Hora - </li>
-            <li class="list-group-item">Aeropuerto - </li>
-            <li class="list-group-item">Destino - </li>
-            <li class="list-group-item">Terminal - </li>
-          </ul>
-
-    </div>
-</div>
-
-
-  <table class="table mt-5">
-    <thead>
-      <tr>
-        <th scope="col">Predicción</th>
-        <th scope="col">Temperatura</th>
-        <th scope="col">Viento</th>
-        <th scope="col">Humedad</th>
-        <th scope="col">Presión</th>
-
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>1</td>
-        <td>2</td>
-        <td>3</td>
-        <td>4</td>
-        <td>5</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <div id="primary-content">
-    <div class="wrapper">
-    <article>
-        <h3>Valoraciones previas</h3>
-    </article>
-</div>
-    
-</div>
-  <div class="card mb-4">
-    <div class="card-header"><i class="fas fa-chart-bar mr-1"></i>Bar Chart Example</div>
-    <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas></div>
+<div class="row justify-content-center">
+  <div class="col-9 align-self-center">
+      <div class="card mb-4">
+          <div class="card-header"><i class="fas fa-chart-bar mr-1"></i>Valoraciones</div>
+          <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas></div>
+      </div>
+  </div>
 </div>

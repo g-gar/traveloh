@@ -13,13 +13,13 @@ export class FlightService {
 
   getFlights(): Promise<FlightList> {
     let ajax: AjaxService = this.injector.get(AjaxService);
-    let url: string = ajax.buildUrlFromEnvironment(environment.API.paths.info.airlines);
+    let url: string = ajax.buildUrlFromEnvironment(environment.API.paths.info.flights);
     return ajax.get<FlightList>(url);
   }
 
-  getFlight(id: number): Promise<Flight> {
+  async getFlight(id: number): Promise<Flight> {
     let ajax: AjaxService = this.injector.get(AjaxService);
-    let url: string = ajax.buildUrlFromEnvironment(environment.API.paths.info.airline(id));
+    let url: string = ajax.buildUrlFromEnvironment(environment.API.paths.info.flight(id));
     return ajax.get<Flight>(url);
   }
 }

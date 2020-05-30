@@ -15,11 +15,16 @@ class FlightsController extends Controller
 	 * Returns all flights complete information
 	 */
     public static function getFlightsInfo() {
-        return array_map(function($flight){
-                return self::getFlightInfo($flight->id);
-            }, 
-            DB::table('flight_data')->join('aena', 'aena.id', '=', 'flight_data.id')->get()->toArray()
-        );
+        $result = [];
+        $flights = DB::table('flight_data')->join('aena', 'aena.id', '=', 'flight_data.id')->get()->toArray();
+        foreach ($flights as $flight) {
+            $info = self::getFlightInfo($flight->id);
+            array_push($result, [
+                'id' => $flight->id,
+                'code' => $info['more_flight_info']['data']['flight_code']
+            ]);
+        }
+        return $result;
     }
 
     /**
