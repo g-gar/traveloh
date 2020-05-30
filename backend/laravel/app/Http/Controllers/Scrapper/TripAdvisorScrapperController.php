@@ -22,6 +22,7 @@ class TripAdvisorScrapperController extends ScrapperController
 	}
 
 	public static function consume_json($json) {
+
 		foreach (json_decode($json, true) as $key => $json) {
 			try {
 				foreach ($json as $key => $value) {
@@ -72,7 +73,7 @@ class TripAdvisorScrapperController extends ScrapperController
 		$result = [];
         $commands = self::generateCommands($args);
         foreach (CommandController::execute($commands) as $key => $json) {
-            array_push($result, $json);
+            array_push($result, json_decode($json, true));
             self::consume_json($json);
         }
         return $result;
