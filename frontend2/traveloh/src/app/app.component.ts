@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Injector } from '@angular/core';
+import { FlightService } from './service/flight.service';
 
 @Component({
   selector: 'app-root',

@@ -53,7 +53,7 @@ import { ResultComponent } from './view/guest/result/result.component';
     ScrapperService,
     AirportService,
     AirlineService,
-    FlightService    
+    FlightService
   ],
   bootstrap: [AppComponent]
 })

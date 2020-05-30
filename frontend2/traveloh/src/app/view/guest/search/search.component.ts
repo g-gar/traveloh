@@ -1,12 +1,8 @@
 import { Component, OnInit, Injector } from '@angular/core';
-import { AjaxService } from 'src/app/service/ajax.service';
-import { environment } from 'src/environments/environment';
-import { Airport } from 'src/app/model/airport.model';
-import { Observable } from 'rxjs';
-import { finalize } from 'rxjs/operators';
-import { AirportList } from 'src/app/model/airport-list.model';
-import { AirportService } from 'src/app/service/airport.service';
-import { AirlineService } from 'src/app/service/airline.service';
+import { FlightService } from 'src/app/service/flight.service';
+import { FlightList } from 'src/app/model/flight-list.model';
+import { FlightListItem } from 'src/app/model/flight-list-item.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-search',
@@ -15,14 +11,29 @@ import { AirlineService } from 'src/app/service/airline.service';
 })
 export class SearchComponent implements OnInit {
 
-  constructor(private injector: Injector) {
 
-   }
+
+  constructor(private injector: Injector) {}
 
   ngOnInit(): void {
+    
+  }
 
-    //new AirlineService(this.injector).getAirlines().then(console.log)
-    //new AirportService(this.injector).getAirport("MAD").then(console.log)
+  searchFlight(code : string) {
+    let srv : FlightService = this.injector.get(FlightService);
+    let router : Router = this.injector.get(Router);
+    console.log(code)
+
+    srv.getFlights().then((list: FlightList) => {
+      console.log(list)
+      let flight : FlightListItem = list.find((e : FlightListItem) => e.code == code);
+      if (!!flight) {
+        router.navigate(['/result', flight.id]);
+      } else {
+        // hacer algo en caso de que el vuelo no exista
+      }
+    })
+
   }
 
 }

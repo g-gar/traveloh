@@ -23,7 +23,7 @@
 <form class="container mt-3" >
     <div class="form-group">
         <label>Numero de vuelo</label>
-        <input type="text" class="form-control" id="usr">
+        <input type="text" class="form-control" id="usr" #fligtcode />
     </div>
     <hr class="rounded">
     <div class="form-group">
@@ -33,7 +33,7 @@
         <select class="custom-select select" name="selectedLevel1"  default="Choose Here">
         </select>
         <br><br>
-        <input class="btn btn-primary text-center" type="submit" value="Buscar" >
+        <input (click)="searchFlight(fligtcode.value)" class="btn btn-primary text-center" type="button" value="Buscar" >
         <br><br>
     </div>
    
