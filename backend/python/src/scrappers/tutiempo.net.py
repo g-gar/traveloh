@@ -40,8 +40,6 @@ if __name__ == "__main__":
     args = parser.parse_args()
     results = scrape(args.url)
     print(json.dumps(
-        {
-            'results': results
-        },
+        results,
         default=lambda o: o.__dict__, sort_keys=True, indent=4
     ))

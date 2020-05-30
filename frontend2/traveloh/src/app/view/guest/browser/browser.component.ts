@@ -9,7 +9,7 @@ import { AirportList } from 'src/app/model/airport-list.model';
   styleUrls: ['./browser.component.scss']
 })
 export class BrowserComponent implements OnInit {
-  lists: AirportList[]
+  list: AirportList[]
     
   constructor(private airportService: AirportService) {
   }

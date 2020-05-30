@@ -68,8 +68,6 @@ if __name__ == "__main__":
 	reviews = get_info(args.url)
 	
 	print(json.dumps(
-		{
-			'reviews': reviews
-		},
+		reviews,
 		default=lambda o: o.__dict__, sort_keys=True, indent=4
 	))

@@ -13,7 +13,7 @@ const routes: Routes = [
   { path: 'browse', component: BrowserComponent },
   { path: 'login', component: LoginComponent},
   { path: 'admin', component: AdminlandComponent},
-  { path: 'result', component: ResultComponent}
+  { path: 'result/:flight', component: ResultComponent}
 
 
 ];
