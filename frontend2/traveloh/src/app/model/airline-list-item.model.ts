@@ -1,3 +1,5 @@
+import { Input } from '@angular/core';
+
 export class AirlineListItem {
-   constructor(id: number, tripadvisorCode: string, name: string, tripadvisor_name) {}
+   constructor(public id: number, public tripadvisorCode: string, public name: string, public tripadvisor_name: string) {}
 }

@@ -23,12 +23,12 @@ export class AirlineService {
   getAirline(id: number): Promise<Airline> {
     let ajax: AjaxService = this.injector.get(AjaxService);
     let url: string = ajax.buildUrlFromEnvironment(environment.API.paths.info.airline(id));
-    return ajax.get<AirlineList>(url);
+    return ajax.get<Airline>(url);
   }
 
-  getRanking(): Promise<Array<[number, number]>> {
+  getRanking(): Promise<any> {
     let ajax: AjaxService = this.injector.get(AjaxService);
     let url: string = ajax.buildUrlFromEnvironment(environment.API.paths.info.airlineRanking);
-    return ajax.get<Array<[number, number]>>(url);
+    return ajax.get(url);
   }
 }
