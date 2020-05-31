@@ -1,9 +1,10 @@
 
 <div id="hero-image">
-    <div class="wrapper">
+    <div class="hero-text">
+        <h1>From Spain to Everywhere</h1>
         
-   
-    </div>
+        
+      </div>
 </div>
 
 <div id="primary-content">
@@ -11,7 +12,9 @@
     <article>
         <h3>¿Quienes somos?</h3>
         <p>FMG Technologies crea Traveloh como propuesta de solución a uno de los mayores problemas de nuestro día a día: La gestión del tiempo<br>Por ello, hemos llevado a
-            cabo una aplicación web que nos permita acceder a toda la información relevante sobre los vuelos de los principales aeropuertos de España
+            cabo una aplicación web que nos permita acceder a toda la información relevante sobre los vuelos de los principales aeropuertos de España.<br><br>
+            A continuación les ofrecemos nuestro buscador de vuelos FMG Technologies. Si su vuelo no se encuentra en nuestro sistema,<br>
+             porfavor, póngase en contacto con un administrador.
         </p>
         
     </article>
@@ -24,16 +27,8 @@
     <div class="form-group">
         <label>Numero de vuelo</label>
         <input type="text" class="form-control" id="usr" #fligtcode />
-    </div>
-    <hr class="rounded">
-    <div class="form-group">
-        <label>Origen</label>
-        <select class="custom-select select" name="selectedLevel"  default="Choose Here"></select>
-        <label>Destino</label>
-        <select class="custom-select select" name="selectedLevel1"  default="Choose Here">
-        </select>
-        <br><br>
-        <input (click)="searchFlight(fligtcode.value)" class="btn btn-primary text-center" type="button" value="Buscar" >
+    
+        <input (click)="searchFlight(fligtcode.value)" class="btn btn-primary text-center mt-3" type="button" value="Buscar" >
         <br><br>
     </div>
    

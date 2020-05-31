@@ -29,18 +29,22 @@ export class Flight {
       this.id = flight['id'];
       this.code = flightInfo['data']['flight_code'];
 
-      this.flightType = flightInfo['type'];
-      this.hour = flightInfo['data']['hour'];
-      this.destination = flightInfo['data']['destination'];
-      this.company = flightInfo['data']['company'];
-      this.terminal = flightInfo['data']['terminal'];
+      if (!!flightInfo) {
+         this.flightType = flightInfo['type'];
+         this.hour = flightInfo['data']['hour'];
+         this.destination = flightInfo['data']['destination'];
+         this.company = flightInfo['data']['company'];
+         this.terminal = flightInfo['data']['terminal'];
+      }
 
-      this.weatherType = weatherInfo['type'];
-      this.weather = weatherInfo['data']['weather'];
-      this.temperature = weatherInfo['data']['temperature'];
-      this.wind = weatherInfo['data']['wind'];
-      this.humidity = weatherInfo['data']['humidity'];
-      this.atmosphericPressure = weatherInfo['data']['atmospheric_pressure'];
+      if (!!weatherInfo) {
+         this.weatherType = weatherInfo['type'];
+         this.weather = weatherInfo['data']['weather'];
+         this.temperature = weatherInfo['data']['temperature'];
+         this.wind = weatherInfo['data']['wind'];
+         this.humidity = weatherInfo['data']['humidity'];
+         this.atmosphericPressure = weatherInfo['data']['atmospheric_pressure'];
+      }
       
 
       /* console.log(flight, flightInfo, weatherInfo);

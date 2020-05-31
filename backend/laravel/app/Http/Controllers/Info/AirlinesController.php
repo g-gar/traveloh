@@ -58,7 +58,10 @@ class AirlinesController extends Controller
         return array_map(function($flight){
             return FlightsController::getFlightInfo($flight->flight_code);
         }, DB::table('airlines')
-            ->join('flight_data', 'flight_data.id_airline', '=', $airline->id)->get()->toArray()
+            ->join('flight_data', 'flight_data.id_airline', '=', $airline->id)
+            ->where('flight_data.id_airline', '>', -1)
+            ->get()
+            ->toArray()
         );
     }
 }

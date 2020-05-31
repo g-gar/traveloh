@@ -17,6 +17,6 @@ class AdministratorSeeder extends Seeder
             User::destroy($administrator->id);
             Administrator::destroy($administrator->id);
         });
-        factory(Administrator::class, 50)->create();
+        factory(Administrator::class, 5)->create();
     }
 }

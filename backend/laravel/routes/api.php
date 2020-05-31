@@ -25,6 +25,9 @@ Route::get('execute/sentiment/twitter.com/{code}', 'TwitterSentimentController@i
 
 Route::get('execute/scrapper/aena.es/{code}', 'AenaScrapperController@init');
 
+Route::get('execute/scrappers/all', 'ExecScrappers@init');
+
+
 Route::get('info/airports/ranking', 'AirportsController@getRanking');
 Route::get('info/airports/', 'AirportsController@getAirports');
 Route::get('info/airports/{airport}', 'AirportsController@getAirport');
@@ -35,3 +38,4 @@ Route::get('info/airlines/{airline}', 'AirlinesController@getAirline');
 
 Route::get('info/flights/', 'FlightsController@getFlightsInfo');
 Route::get('info/flights/{flight}', 'FlightsController@getFlightInfo');
+

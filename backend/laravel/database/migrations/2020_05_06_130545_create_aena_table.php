@@ -20,6 +20,7 @@ class CreateAenaTable extends Migration
             $table->string('destination');
             $table->string('company');
             $table->string('terminal');
+            $table->date('date');
         });
     }
 

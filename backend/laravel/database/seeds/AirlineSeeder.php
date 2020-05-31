@@ -16,25 +16,32 @@ class AirlineSeeder extends Seeder
      */
     public function run()
     {
+        //MAD
         DB::table('airlines')->insert([
-            'tripadvisor_code' => 11831129,
-            'name' => 'Aerolinea De Antioquía',
-            'tripadvisor_name' => 'Aerolinea-De-Antioquia'
+            'tripadvisor_code' => 8729089,
+            'name' => 'Iberia',
+            'tripadvisor_name' => 'Iberia',
+            'aena_name' => 'IBERIA'
         ]);
         DB::table('airlines')->insert([
-            'tripadvisor_code' => 8729069,
-            'name' => 'Emirates',
-            'tripadvisor_name' => 'Emirates'
+            'tripadvisor_code' => 10823588,
+            'name' => 'Iberia Express',
+            'tripadvisor_name' => 'Iberia-Express',
+            'aena_name' => 'IBERIA EXPRESS'
+        ]);
+
+        //BCN
+        DB::table('airlines')->insert([
+            'tripadvisor_code' => 8729113,
+            'name' => 'Lufthansa',
+            'tripadvisor_name' => 'Lufthansa',
+            'aena_name' => 'LUFTHANSA'
         ]);
         DB::table('airlines')->insert([
             'tripadvisor_code' => 8729089,
             'name' => 'Iberia',
-            'tripadvisor_name' => 'Iberia'
+            'tripadvisor_name' => 'Iberia',
+            'aena_name' => 'IBERIA'
         ]);
-
-        foreach (Airline::all() as $airline) {
-            TripAdvisorScrapperController::init($airline->tripadvisor_code);
-            TripAdvisorSentimentController::init($airline->tripadvisor_code);
-        }
     }
 }

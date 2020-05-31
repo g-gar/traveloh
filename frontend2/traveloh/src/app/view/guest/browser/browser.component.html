@@ -11,7 +11,8 @@
  
 <div class="row text-center justify-content-center mt-5">
 
-  <div class="col-xl-5">
+  
+  <div class="col-xl-5 text-center">
     <table class="table">
       <thead class="thead-dark">
         <tr>
@@ -20,31 +21,16 @@
       </thead>
       <tbody>
         <tr></tr>
-        <tr *ngFor="let airline of airlines">
-          <td > Aerolinea Uno </td>
-          <td> {{ airline.rating }}</td>
+        <tr *ngFor="let airline of airlines; index as i" >
+          <th class="text-muted">Aerolinea {{i+1}} - {{ airline.rating }}</th>
         </tr>
      
       </tbody>
     </table>
-</div>
+  </div> 
 </div>
 
-<form>
-  <div class="form-row justify-content-center mt-5">
-    <h4 class="text-muted mr-2">Filtrar por</h4>
-    <div class="col-md-auto">
-      <select class="form-control ">
-        <option>Aeropuerto</option>
-      </select>
-    </div>
-    <div class="col-md-auto ">
-      <select class="form-control ">
-        <option>Aerolinea</option>
-      </select>
-    </div>
-  </div>
-</form>
+
   <br><br>
 
   
@@ -54,17 +40,18 @@
         <th scope="col">Hora</th>
         <th scope="col">CodigoVuelo</th>
         <th scope="col">Aeropuerto</th>
-        <th scope="col">Origen</th>
         <th scope="col">Destino</th>
         <th scope="col">Terminal</th>
 
       </tr>
     </thead>
     <tbody>
-      <tr class="">
-        <td>
-          
-        </td>
+      <tr *ngFor="let flight of flights">
+        <th class="text-muted">{{ flight.more_flight_info.data.hour }}</th>
+        <th class="text-muted">{{ flight.more_flight_info.data.flight_code }}</th>
+        <th class="text-muted">MAD</th>
+        <th class="text-muted">{{ flight.more_flight_info.data.destination }}</th>
+        <th class="text-muted">{{ flight.more_flight_info.data.terminal }}</th>
       </tr>
     </tbody>
   </table>
