@@ -15,9 +15,10 @@ class CreateAirlinesTable extends Migration
     {
         Schema::create('airlines', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('tripadvisor_code')->unique();
+            $table->integer('tripadvisor_code');
             $table->string('name');
             $table->string('tripadvisor_name');
+            $table->string('aena_name');
         });
     }
 

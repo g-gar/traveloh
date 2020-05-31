@@ -15,10 +15,10 @@
   <div class="col-6 align-self-center">
       
       <ul class="list-group">
-          <li class="list-group-item text-muted">Hora - {{flight.hour}}</li>
-          <li class="list-group-item text-muted">Aeropuerto - </li>
-          <li class="list-group-item text-muted">Destino - {{flight.destination}}</li>
-          <li class="list-group-item text-muted">Terminal - {{flight.terminal}}</li>
+          <li class="list-group-item text-muted">Hora - {{flight?.hour}}</li>
+          <li class="list-group-item text-muted">Aeropuerto - MAD</li>
+          <li class="list-group-item text-muted">Destino - {{flight?.destination}}</li>
+          <li class="list-group-item text-muted">Terminal - {{flight?.terminal}}</li>
         </ul>
 
   </div>
@@ -40,11 +40,11 @@
           </thead>
           <tbody>
             <tr>
-              <td>{{flight.weather}}</td>
-              <td>{{flight.temperature}}</td>
-              <td>{{flight.wind}}</td>
-              <td>{{flight.humidity}}</td>
-              <td>{{flight.atmosphericPressure}}</td>
+              <td>{{flight?.weather}}</td>
+              <td>{{flight?.temperature}}</td>
+              <td>{{flight?.wind}}</td>
+              <td>{{flight?.humidity}}</td>
+              <td>{{flight?.atmosphericPressure}}</td>
             </tr>
           </tbody>
         </table>

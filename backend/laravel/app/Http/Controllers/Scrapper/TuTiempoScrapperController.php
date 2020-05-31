@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Model\TuTiempo;
 
 /**
  * Scrapes tutiempo.net
@@ -28,26 +29,32 @@ class TuTiempoScrapperController extends ScrapperController
 
 	public static function consume_json($json) {
 		foreach (json_decode($json, true) as $key => $json) {
-			try {
-				foreach ($json as $key => $value) {
-					$id = DB::table('data')->insertGetId([
-						'identifier' => 'tutiempo',
-						'source' => 'tutiempo.net'
-					]);
-					DB::table('weather_data')->insert([
-						'id' => $id
-					]);
-					DB::table('tutiempo')->insert([
-						'id' => $id,
-						'weather' => $value['weather'],
-						'hour' => $value['hour'],
-						'temperature' => $value['temperature'],
-						'wind' => $value['wind'],
-						'humidity' => $value['humidity'],
-						'atmospheric_pressure' => $value['atmospheric_pressure'],
-						'timestamp' => now()
-					]);
+			try {	
+				$id = DB::table('data')->insertGetId([
+					'identifier' => 'tutiempo',
+					'source' => 'tutiempo.net'
+				]);
+				DB::table('weather_data')->insert([
+					'id' => $id
+				]);
+
+				$results = TuTiempo::where([
+					'hour' => $json['hour'],
+					'timestamp' => date("Y-m-d")
+				])->get();
+				foreach ($results as $result) {
+					$result->delete();
 				}
+				DB::table('tutiempo')->insert([
+					'id' => $id,
+					'weather' => $json['weather'],
+					'hour' => $json['hour'],
+					'temperature' => $json['temperature'],
+					'wind' => $json['wind'],
+					'humidity' => $json['humidity'],
+					'atmospheric_pressure' => $json['atmospheric_pressure'],
+					'timestamp' => date("Y-m-d")
+				]);
 			} catch (\Throwable $th) {
 				throw $th;
 			}
@@ -59,10 +66,10 @@ class TuTiempoScrapperController extends ScrapperController
 	 * @urlParam airport-code required The airport code. Example: MAD
 	 */
 	public static function init($args) {
-		$result = [];
+		$result = null;
         $commands = self::generateCommands($args);
         foreach (CommandController::execute($commands) as $key => $json) {
-            array_push($result, $json);
+            $result = json_decode($json, true);
             self::consume_json($json);
         }
         return $result;

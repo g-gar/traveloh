@@ -1,9 +1,10 @@
-import { Component, OnInit, Injector } from '@angular/core';
+import { Component, OnInit, Injector, Input, Attribute } from '@angular/core';
 import { Router } from '@angular/router';
 import { FlightService } from 'src/app/service/flight.service';
 import { Flight } from 'src/app/model/flight.model';
 import { SentimentData } from 'src/app/model/data/sentiment/sentiment-data.interface';
 import { Airport } from 'src/app/model/airport.model';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-result',
@@ -19,14 +20,19 @@ export class ResultComponent implements OnInit {
     let router : Router = injector.get(Router);
     let url : string = router.url;
     this.id = parseInt(url.split('/').reverse()[0]);
-
-    
   }
 
   ngOnInit() {
-    this.loadFlightInfo(this.id).then((e: Flight) => {
+
+    
+    this.loadFlightInfo(this.id)
+    .then(e => {
+      console.log(e)
+      return e
+    })
+    .then((e: Flight) => {
       this.flight = new Flight(e['flight_data'], e['more_flight_info'], e['weather_info']);
-      
+      console.log(this.flight)
     })
   }
 
@@ -39,7 +45,11 @@ export class ResultComponent implements OnInit {
     return null;
   }
 
-  loadDepartureAirport() : Promise<Airport> {
+  loadWeatherInfo() : Promise<Airport> {
     return null;
+  }
+
+  function ($scope) {
+    $scope.hora = this.flight.hour;
   }
 }

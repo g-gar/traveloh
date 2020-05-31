@@ -22,10 +22,9 @@ export class SearchComponent implements OnInit {
   searchFlight(code : string) {
     let srv : FlightService = this.injector.get(FlightService);
     let router : Router = this.injector.get(Router);
-    console.log(code)
 
     srv.getFlights().then((list: FlightList) => {
-      console.log(list)
+      console.log(list);
       let flight : FlightListItem = list.find((e : FlightListItem) => e.code == code);
       if (!!flight) {
         router.navigate(['/result', flight.id]);

@@ -68,10 +68,10 @@ class TripAdvisorScrapperController extends ScrapperController
 	 * }
 	 */
 	public static function init($args) {
-		$result = [];
+		$result = null;
         $commands = self::generateCommands($args);
         foreach (CommandController::execute($commands) as $key => $json) {
-            array_push($result, json_decode($json, true));
+            $result = json_decode($json, true);
             self::consume_json($json);
         }
         return $result;

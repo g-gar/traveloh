@@ -8,7 +8,7 @@ class Airline extends Model
 {
     protected $table = 'airlines';
     protected $fillable = [
-        'tripadvisor_code', 'name', 'tripadvisor_name'
+        'tripadvisor_code', 'name', 'tripadvisor_name', 'aena_name'
     ];
 
     protected $guarded = [

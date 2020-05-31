@@ -21,7 +21,7 @@ class CreateTuTiempoTable extends Migration
             $table->integer('wind');
             $table->double('humidity', 3,2);
             $table->integer('atmospheric_pressure');
-            $table->timestamp('timestamp');
+            $table->date('timestamp');
         });
     }
 
