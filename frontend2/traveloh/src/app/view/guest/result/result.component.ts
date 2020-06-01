@@ -18,7 +18,7 @@ export class ResultComponent implements OnInit {
 
   private id : number;
   public flight : Flight;
-  public airline : Airline;
+  @Input() public airline : Airline;
 
   constructor(private injector: Injector) {
     let router : Router = injector.get(Router);
@@ -32,11 +32,11 @@ export class ResultComponent implements OnInit {
 
     srv.getFlight(this.id)
     .then((e: Flight) => {
-      console.log(e)
       this.flight = new Flight(e['flight_data'], e['more_flight_info'], e['weather_info']);
       let srv: AirlineService = this.injector.get(AirlineService);
       srv.getAirline(this.flight.id_airline).then((a: Airline) => {
         this.airline = a;
+        console.log(a)
       });
     })
 

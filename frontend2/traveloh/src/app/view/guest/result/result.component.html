@@ -2,7 +2,7 @@
   <div class="wrapper">
   <article>
       <h3>Su vuelo</h3>
-      <p class="text-muted">A continuación se le facilita la información más importante sobre su vuelo, así como la condición meteorológica esperada
+      <p class="text-muted">A continuación se le facilita la información más importante sobre su vuelo,<br> así como valoraciones de la aerolínea extraídas de internet.
       </p>
 
   </article>
@@ -25,7 +25,7 @@
 </div>
 
 
-<div class="row justify-content-center">
+<!-- <div class="row justify-content-center">
   <div class="col-9 align-self-center">
       <table class="table mt-5 text-center">
           <thead>
@@ -49,7 +49,7 @@
           </tbody>
         </table>
   </div>
-</div>
+</div> -->
 
 <div id="primary-content">
   <div class="wrapper">
@@ -59,11 +59,11 @@
 </div>
 
 
-<!-- <div class="row justify-content-center">
-  <div class="col-9 align-self-center  text-center" *ngFor="let comment of flight.comments; index as i">
+<div class="row justify-content-center">
+  <div class="col-9 align-self-center  text-center" *ngFor="let comment of airline.comments; let i = index">
       <div class="card mb-4">
-          <div class="card-header"><i class="fas fa-chart-bar mr-1"></i>Reseñas sobre {{ flight?.company }} {{ i }}</div>
-          <div class="card-body text-center">{{ comment }}</div>
+          <div class="card-header"><i class="fas fa-chart-bar mr-1"></i>Reseñas Nº: {{ i }}</div>
+          <div class="card-body text-center"><p class="text-muted">{{ comment }}</p></div>
       </div>
   </div>
-</div> -->
+</div>

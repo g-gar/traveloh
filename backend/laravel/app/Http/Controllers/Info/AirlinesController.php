@@ -68,9 +68,14 @@ class AirlinesController extends Controller
 
     public static function getComments(Airline $airline){
         return DB::table('tripadvisor')
-            ->join('sentiment_analysis_data', 'sentiment_analysis_data.id_airline', '=', $airline->id)
+            ->join('sentiment_analysis_data', function ($join) use ($airline) {
+                $join->on('sentiment_analysis_data.id', '=', 'tripadvisor.id')
+                    ->where('sentiment_analysis_data.id_airline', '=', $airline->id);
+            })
+            ->groupBy('tripadvisor.id_opinion')
             ->select('text')
             ->get()
+            ->pluck('text')
             ->toArray();
     }
 }
