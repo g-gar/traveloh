@@ -51,17 +51,26 @@ class AirlinesController extends Controller
         $result['airline'] = $airline;
         $result['flights'] = self::getFlights($airline);
         $result['rating'] = self::getRating($airline);
+        $result['comments'] = self::getComments($airline);
         return $result;
     }
 
     public static function getFlights($airline) {
         return array_map(function($flight){
-            return FlightsController::getFlightInfo($flight->flight_code);
+            return FlightsController::getFlightInfo($flight->id);
         }, DB::table('airlines')
             ->join('flight_data', 'flight_data.id_airline', '=', $airline->id)
-            ->where('flight_data.id_airline', '>', -1)
+            ->join('aena', 'aena.id', '=', 'flight_data.id')
             ->get()
             ->toArray()
         );
+    }
+
+    public static function getComments(Airline $airline){
+        return DB::table('tripadvisor')
+            ->join('sentiment_analysis_data', 'sentiment_analysis_data.id_airline', '=', $airline->id)
+            ->select('text')
+            ->get()
+            ->toArray();
     }
 }

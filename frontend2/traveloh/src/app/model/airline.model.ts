@@ -5,7 +5,7 @@ import { Input } from '@angular/core';
 
 export class Airline {
    public id : number;
-   constructor(public info: AirlineListItem, public flights: FlightList, public rating: number) {
+   constructor(public info: AirlineListItem, public flights: FlightList, public rating: number, ) {
       this.id = info.id;
    }
 

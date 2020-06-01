@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Model\Airline;
 use App\Model\Airport;
+use App\Model\AirportAirline;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -43,7 +44,7 @@ class AirportsController extends Controller
      * @urlParam airport required The airport code. Example: MAD
 	 */
     public static function getAirport($code) {
-        $airport = Airport::where('code', '=', $code)->firstOrFail();
+        $airport = Airport::where('code', '=', $code)->get()->firstOrFail();
         $result['airport'] = $airport;
         $result['airlines'] = array_map(function($airline){
             return AirlinesController::getAirlines($airline->id);
@@ -52,10 +53,27 @@ class AirportsController extends Controller
         return $airport;
     }
 
-    public static function getAirlines($airport) {
-        return DB::table('airports')
-            ->join('airport_airlines', 'airport_airlines.id_airport', '=', $airport->id)
+    public static function getAirlines(string $airport_code) {
+        /* return DB::table('airports')
+            ->join('airport_airlines', 'airport_airlines.id_airport', '=', "$airport_code")
             ->join('airlines', 'airlines.id', '=', 'airport_airlines.id_airline')
-            ->get()->toArray();
+            ->select('airlines.*')
+            ->get()
+            ->toArray(); */
+
+        $airlines = [];
+        foreach (Airport::all() as $airport) {
+            if ($airport->code == $airport_code) {
+                $temp = $airport->id;
+                $ais = array_filter(DB::table('airport_airlines')->get()->toArray(), function($ai) use ($temp) {
+                    return $ai->id_airport == $temp;
+                });
+                var_dump($ais);
+                foreach ($ais as $ai) {
+                    array_push($airlines, Airline::find($ai->id));
+                }
+            }
+        }
+        return $airlines;
     }
 }

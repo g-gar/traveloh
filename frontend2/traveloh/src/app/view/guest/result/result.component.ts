@@ -5,6 +5,9 @@ import { Flight } from 'src/app/model/flight.model';
 import { SentimentData } from 'src/app/model/data/sentiment/sentiment-data.interface';
 import { Airport } from 'src/app/model/airport.model';
 import { Observable, of } from 'rxjs';
+import { Airline } from 'src/app/model/airline.model';
+import { AirportService } from 'src/app/service/airport.service';
+import { AirlineService } from 'src/app/service/airline.service';
 
 @Component({
   selector: 'app-result',
@@ -15,6 +18,7 @@ export class ResultComponent implements OnInit {
 
   private id : number;
   public flight : Flight;
+  public airline : Airline;
 
   constructor(private injector: Injector) {
     let router : Router = injector.get(Router);
@@ -24,32 +28,18 @@ export class ResultComponent implements OnInit {
 
   ngOnInit() {
 
-    
-    this.loadFlightInfo(this.id)
-    .then(e => {
-      console.log(e)
-      return e
-    })
-    .then((e: Flight) => {
-      this.flight = new Flight(e['flight_data'], e['more_flight_info'], e['weather_info']);
-      console.log(this.flight)
-    })
-  }
-
-  loadFlightInfo(id: number) : Promise<Flight> {
     let srv : FlightService = this.injector.get(FlightService);
-    return srv.getFlight(this.id);
-  }
 
-  loadComentaries() : Promise<SentimentData[]> {
-    return null;
-  }
+    srv.getFlight(this.id)
+    .then((e: Flight) => {
+      console.log(e)
+      this.flight = new Flight(e['flight_data'], e['more_flight_info'], e['weather_info']);
+      let srv: AirlineService = this.injector.get(AirlineService);
+      srv.getAirline(this.flight.id_airline).then((a: Airline) => {
+        this.airline = a;
+      });
+    })
 
-  loadWeatherInfo() : Promise<Airport> {
-    return null;
-  }
 
-  function ($scope) {
-    $scope.hora = this.flight.hour;
   }
 }
