@@ -23,13 +23,15 @@ export class Flight {
    public humidity: number;
    public atmosphericPressure: number;
 
+   public id_airline : number;
 
    constructor(flight: Object, flightInfo: Object, weatherInfo: Object) {
 
       this.id = flight['id'];
-      this.code = flightInfo['data']['flight_code'];
+      this.id_airline = flight['id_airline'];
 
       if (!!flightInfo) {
+        this.code = flightInfo['data']['flight_code'];
          this.flightType = flightInfo['type'];
          this.hour = flightInfo['data']['hour'];
          this.destination = flightInfo['data']['destination'];
@@ -45,7 +47,8 @@ export class Flight {
          this.humidity = weatherInfo['data']['humidity'];
          this.atmosphericPressure = weatherInfo['data']['atmospheric_pressure'];
       }
-      
+      console.log(weatherInfo)
+
 
       /* console.log(flight, flightInfo, weatherInfo);
 

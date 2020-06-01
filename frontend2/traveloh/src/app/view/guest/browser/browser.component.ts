@@ -18,12 +18,12 @@ export class BrowserComponent implements OnInit {
   @Input() airlines: Array<Airline> = [];
   @Input() flights: Array<Flight> = [];
 
-  
+
   constructor(private airlineService: AirlineService, private flightService: FlightService) {
   }
 
   ngOnInit() {
-    
+
     this.getAirlines()
     this.getRanks()
     this.getflights()
@@ -33,7 +33,7 @@ export class BrowserComponent implements OnInit {
   getAirlines() {
     this.airlineService.getAirlines().then((list: AirlineList) => {
       list.slice(0,5).forEach((item: AirlineListItem) => {
-        
+
         this.airlineService.getAirline(item.id).then((airline: Airline) => {
           this.airlines.push(airline);
           this.airlines = this.airlines.sort((a: Airline, b: Airline) => {
@@ -43,7 +43,6 @@ export class BrowserComponent implements OnInit {
 
       })
     })
-    console.log(this.airlines)
   }
 
   getRanks():void{
@@ -55,7 +54,7 @@ export class BrowserComponent implements OnInit {
   getflights() {
     this.flightService.getFlights().then((list1: FlightList) => {
       list1.slice(0,10).forEach((item1: FlightListItem) => {
-        
+
         this.flightService.getFlight(item1.id).then((flight: Flight) => {
           this.flights.push(flight);
         })

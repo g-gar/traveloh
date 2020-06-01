@@ -11,6 +11,7 @@ export const environment = {
     paths: {
       authentication: '/authenticate/',
       scrapper: '/execute/scrapper',
+      scrappers: '/execute/scrappers/all',
       sentiment: '/execute/sentiment/',
       info: {
         airports: '/info/airports/',

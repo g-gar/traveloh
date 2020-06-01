@@ -10,10 +10,11 @@ class TripAdvisorScrapperController extends ScrapperController
 	private static $airline;
 
     public static function generateCommands($tripadvisor_code){
-		$commands = [];
-		self::$airline = DB::table('airlines')->where('tripadvisor_code', $tripadvisor_code)->first();
+        $commands = [];
+        self::$airline = DB::table('airlines')->where('tripadvisor_code', $tripadvisor_code)->get()->first();
+        var_dump(self::$airline);
         $name = self::$airline->tripadvisor_name;
-        
+
         $commands[$tripadvisor_code] = PathsController::get_python_executable() . ' ';
         $commands[$tripadvisor_code] .= realpath(PathsController::get_python_path() . '/src/scrappers/tripadvisor.es.py') . ' --url ';
         $commands[$tripadvisor_code] .= "https://www.tripadvisor.es/Airline_Review-d$tripadvisor_code-Reviews-$name";

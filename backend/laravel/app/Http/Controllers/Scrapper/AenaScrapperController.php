@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Model\Airport;
 use App\Model\Aena;
+use App\Model\TuTiempo;
 
 /**
  * Scrapes aena.es
@@ -32,6 +33,7 @@ class AenaScrapperController extends ScrapperController implements FlightScrappe
 
 	public static function consume_json($json) {
 		try {
+			date_default_timezone_set("Europe/Madrid");
 			echo $json;
 			foreach (json_decode($json, true) as $key => $value) {
 				
@@ -43,8 +45,19 @@ class AenaScrapperController extends ScrapperController implements FlightScrappe
 						$join->on('airlines.id', '=', 'airport_airlines.id_airline')
 							->where('airlines.aena_name', '=', $airline_name);
 					})
+					->select('airlines.*')
+					->limit(1)
 					->get()
 					->first();
+
+				$hour = AenaScrapperController::hour2mins($value['hour']);
+				$arr = TuTiempo::whereDate('timestamp', '>=', date("H:i"))
+					->get()
+					->toArray();
+				usort($arr, function($a, $b) {
+					return self::hour2mins($a['hour']) > self::hour2mins($b['hour']) ? -1 : 1;
+				});
+				$tiempo = !!count($arr) ? $arr[0] : null;
 
 				if (!Aena::where('flight_code', '=', $value['flight_code'])->first()) {
 					$id = DB::table('data')->insertGetId([
@@ -53,7 +66,7 @@ class AenaScrapperController extends ScrapperController implements FlightScrappe
 					]);
 					DB::table('flight_data')->insert([
 						'id' => $id,
-						'id_weather_data' => -1,
+						'id_weather_data' => !!$tiempo ? $tiempo['id'] : -1,
 						'id_airline' => !!$airline ? $airline->id : -1
 					]);
 					DB::table('aena')->insert([
@@ -90,5 +103,10 @@ class AenaScrapperController extends ScrapperController implements FlightScrappe
 
 	public static function scrapWeatherData($airport){
 		return null;
+	}
+
+	public static function hour2mins($hour) {
+		$temp = explode(":", $hour);
+		return intval($temp[0]) * 60 + intval($temp[1]);
 	}
 }

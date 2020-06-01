@@ -21,17 +21,20 @@ def toInt(str):
     return int(s) if s else 0
 
 def scrape(url):
+    lista=[]
     page = requests.get(url)
     soup = BeautifulSoup(page.content, 'html.parser')
 
-    cuerpoClima = soup.find("div", class_="last24")
-    table = cuerpoClima.find_next("tbody")
+    try:
+        cuerpoClima = soup.find("div", class_="last24")
+        table = cuerpoClima.find_next("tbody")
 
-    lista=[]
-    for row in table.find_all('tr'):
-        i = [ele.text.strip() for ele in row.findChildren("td", recursive=False)]
-        if len(i) == 6:
-            lista.append( Result( i[0], i[1], toInt(i[2]), toInt(i[3]), float(toInt(i[4])) * 0.01, toInt(i[5]) ))
+        for row in table.find_all('tr'):
+            i = [ele.text.strip() for ele in row.findChildren("td", recursive=False)]
+            if len(i) == 6:
+                lista.append( Result( i[0], i[1], toInt(i[2]), toInt(i[3]), float(toInt(i[4])) * 0.01, toInt(i[5]) ))
+    except Exception:
+        pass
     return lista
 
 if __name__ == "__main__":

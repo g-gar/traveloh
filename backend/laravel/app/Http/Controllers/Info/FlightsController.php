@@ -49,7 +49,7 @@ class FlightsController extends Controller
             $result['weather_info']['type'] = $weather->getTable();
             $result['weather_info']['data'] = $weather;
         } else {
-            $result['weather_info'] = null;
+            $result['weather_info'] = $weather;
         }
 
         return $result;
@@ -64,7 +64,7 @@ class FlightsController extends Controller
     public static function getSpecificWeatherData($id) {
         $result = null;
         
-        $temp = TuTiempo::where('tutiempo.id', '=', $id)->join('weather_data', 'weather_data.id', '=', $id)->first();
+        $temp = TuTiempo::where('tutiempo.id', '=', $id)->get()->first();
         $result = !!$temp ? $temp : $result;
 
         return $result;
